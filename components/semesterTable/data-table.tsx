@@ -16,7 +16,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { CirclePlus } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -24,6 +23,7 @@ interface DataTableProps<TData, TValue> {
   onAddRow?: () => void;
   sgpa?: number;
   updateData?: (rowIndex: number, updates: Partial<TData>) => void;
+  semesterNumber?: number;
 }
 
 export function DataTable<TData, TValue>({
@@ -32,6 +32,7 @@ export function DataTable<TData, TValue>({
   onAddRow,
   sgpa,
   updateData,
+  semesterNumber,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -53,7 +54,7 @@ export function DataTable<TData, TValue>({
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
         <div className="text-center">
           <h2 className="text-lg font-semibold text-gray-700 mb-2">
-            Semester Grade Point Average (SGPA)
+            Semester {semesterNumber} - Grade Point Average (SGPA)
           </h2>
           <div className="text-3xl font-bold text-blue-600">
             {sgpa !== undefined && sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
@@ -122,9 +123,8 @@ export function DataTable<TData, TValue>({
           onClick={onAddRow}
           disabled={hasEmptyRow}
           variant="outline"
-          className="w-full max-w-full"
+          className="w-full max-w-xs"
         >
-          <CirclePlus />
           Add Module
         </Button>
       </div>

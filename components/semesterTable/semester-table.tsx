@@ -4,17 +4,17 @@ import { useState, useMemo } from "react";
 import { DataTable } from "./data-table";
 import { columns, Semester } from "./columns";
 
-export function SemesterTable() {
-  const [data, setData] = useState<Semester[]>([
-    {
-      moduleName: "",
-      moduleCode: "",
-      credit: 0,
-      grade: "",
-      creditPoint: 0,
-    },
-  ]);
+interface SemesterTableProps {
+  semesterNumber: number;
+  data: Semester[];
+  onDataChange: (data: Semester[]) => void;
+}
 
+export function SemesterTable({
+  semesterNumber,
+  data,
+  onDataChange,
+}: SemesterTableProps) {
   // Grade points mapping
   const gradePoints: { [key: string]: number } = {
     "A+": 4.0,
@@ -32,22 +32,21 @@ export function SemesterTable() {
   };
 
   const updateData = (rowIndex: number, updates: Partial<Semester>) => {
-    setData((prev) =>
-      prev.map((row, index) => {
-        if (index === rowIndex) {
-          const updatedRow = { ...row, ...updates };
+    const newData = data.map((row, index) => {
+      if (index === rowIndex) {
+        const updatedRow = { ...row, ...updates };
 
-          // Auto-calculate credit point based on grade and credit
-          if (updates.grade !== undefined || updates.credit !== undefined) {
-            const gradePoint = gradePoints[updatedRow.grade] || 0;
-            updatedRow.creditPoint = updatedRow.credit * gradePoint;
-          }
-
-          return updatedRow;
+        // Auto-calculate credit point based on grade and credit
+        if (updates.grade !== undefined || updates.credit !== undefined) {
+          const gradePoint = gradePoints[updatedRow.grade] || 0;
+          updatedRow.creditPoint = updatedRow.credit * gradePoint;
         }
-        return row;
-      })
-    );
+
+        return updatedRow;
+      }
+      return row;
+    });
+    onDataChange(newData);
   };
 
   const addNewRow = () => {
@@ -58,7 +57,7 @@ export function SemesterTable() {
       grade: "",
       creditPoint: 0,
     };
-    setData((prev) => [...prev, newRow]);
+    onDataChange([...data, newRow]);
   };
 
   // Calculate SGPA
@@ -99,6 +98,7 @@ export function SemesterTable() {
       onAddRow={addNewRow}
       sgpa={sgpa}
       updateData={updateData}
+      semesterNumber={semesterNumber}
     />
   );
 }
