@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { RotateCcw, Plus } from "lucide-react";
+import { RotateCcw, CirclePlus } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -72,9 +72,9 @@ export function DataTable<TData, TValue>({
       {/* SGPA Display with Reset Button */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
         <div className="text-center">
-          <div className="flex justify-between items-start mb-2">
+          <div className="flex flex-col gap-3 justify-between items-center mb-3 sm:flex-row sm:items-end">
             <div className="flex-1">
-              <h2 className="text-lg font-semibold text-gray-700">
+              <h2 className="text-lg font-semibold text-gray-700 sm:pl-32">
                 Semester {semesterNumber} - Grade Point Average (SGPA)
               </h2>
             </div>
@@ -82,12 +82,12 @@ export function DataTable<TData, TValue>({
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button
-                    variant="outline"
+                    variant="destructive"
                     size="sm"
-                    className="flex items-center gap-2 text-red-600 border-red-200 hover:bg-red-50"
+                    className="flex w-full items-center gap-2 sm:w-auto"
                   >
                     <RotateCcw className="h-4 w-4" />
-                    Reset
+                    Reset Sem
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -182,9 +182,9 @@ export function DataTable<TData, TValue>({
           onClick={onAddRow}
           disabled={hasEmptyRow}
           variant="outline"
-          className="w-full max-w-xs flex items-center gap-2"
+          className="w-full max-w-full flex items-center gap-2"
         >
-          <Plus className="h-4 w-4" />
+          <CirclePlus className="h-4 w-4" />
           Add Module
         </Button>
       </div>

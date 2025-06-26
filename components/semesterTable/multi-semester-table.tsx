@@ -189,11 +189,11 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* CGPA Display with Reset All Button */}
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
+      <div className="flex flex-col bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
         <div className="text-center">
-          <div className="flex justify-between items-start mb-3">
+          <div className="flex flex-col gap-3 justify-between items-start mb-3 sm:flex-row sm:items-end">
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-800">
+              <h1 className="text-2xl font-bold text-gray-800 sm:pl-32">
                 Cumulative Grade Point Average (CGPA)
               </h1>
             </div>
@@ -202,9 +202,9 @@ export function MultiSemesterTable() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="flex items-center gap-2"
+                  className="flex w-full items-center gap-2 sm:w-auto"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <RotateCcw className="h-4 w-4" />
                   Reset All
                 </Button>
               </AlertDialogTrigger>
@@ -258,7 +258,7 @@ export function MultiSemesterTable() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-8">
+        <TabsList className=" grid w-full h-30 grid-cols-4 grid-rows-2 sm:grid-cols-8 sm:grid-rows-1 sm:h-full gap-1">
           {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
             const semesterKey = `semester-${semesterNum}`;
             const semesterData = getSemesterData(semesterKey);
@@ -274,12 +274,16 @@ export function MultiSemesterTable() {
                 }`}
               >
                 <div className="flex flex-col items-center">
-                  <span>Sem {semesterNum}</span>
-                  {hasData && (
-                    <span className="text-[10px] text-green-600 font-semibold">
-                      {sgpa.toFixed(2)}
-                    </span>
-                  )}
+                  <span className="text-[14px] sm:text-base ">
+                    Sem {semesterNum}
+                  </span>
+                  <span
+                    className={`text-[10px] font-semibold ${
+                      hasData ? "text-green-600" : "text-gray-400"
+                    } sm:text-[12px]`}
+                  >
+                    {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
+                  </span>
                 </div>
               </TabsTrigger>
             );
