@@ -2,8 +2,21 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import { SemesterTable } from "./semester-table";
 import { Semester } from "./columns";
+import { RotateCcw, Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 // Define the structure for all semester data
 type AllSemesterData = {
@@ -92,6 +105,26 @@ export function MultiSemesterTable() {
     );
   };
 
+  // Reset individual semester
+  const resetSemester = (semesterKey: string) => {
+    const emptyData: Semester[] = [
+      {
+        moduleName: "",
+        moduleCode: "",
+        credit: 0,
+        grade: "",
+        creditPoint: 0,
+      },
+    ];
+    handleSemesterDataChange(semesterKey, emptyData);
+  };
+
+  // Reset all semesters
+  const resetAllSemesters = () => {
+    initializeEmptyData();
+    localStorage.removeItem("gpa-calculator-data");
+  };
+
   // Calculate SGPA for a specific semester
   const calculateSemesterSGPA = (semesterData: Semester[]) => {
     const completeRows = semesterData.filter(
@@ -155,12 +188,48 @@ export function MultiSemesterTable() {
 
   return (
     <div className="w-full space-y-6">
-      {/* CGPA Display */}
+      {/* CGPA Display with Reset All Button */}
       <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-3">
-            Cumulative Grade Point Average (CGPA)
-          </h1>
+          <div className="flex justify-between items-start mb-3">
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-gray-800">
+                Cumulative Grade Point Average (CGPA)
+              </h1>
+            </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Reset All
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will permanently delete all data from all 8
+                    semesters. This cannot be undone. Are you sure you want to
+                    continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={resetAllSemesters}
+                    className="bg-red-600 hover:bg-red-700"
+                  >
+                    Reset All Data
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+
           <div className="text-4xl font-bold text-green-600 mb-2">
             {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
           </div>
@@ -227,6 +296,7 @@ export function MultiSemesterTable() {
                 onDataChange={(data) =>
                   handleSemesterDataChange(semesterKey, data)
                 }
+                onResetSemester={() => resetSemester(semesterKey)}
               />
             </TabsContent>
           );

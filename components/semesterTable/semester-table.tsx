@@ -8,12 +8,14 @@ interface SemesterTableProps {
   semesterNumber: number;
   data: Semester[];
   onDataChange: (data: Semester[]) => void;
+  onResetSemester: () => void;
 }
 
 export function SemesterTable({
   semesterNumber,
   data,
   onDataChange,
+  onResetSemester,
 }: SemesterTableProps) {
   // Grade points mapping
   const gradePoints: { [key: string]: number } = {
@@ -99,6 +101,7 @@ export function SemesterTable({
       sgpa={sgpa}
       updateData={updateData}
       semesterNumber={semesterNumber}
+      onResetSemester={onResetSemester}
     />
   );
 }
