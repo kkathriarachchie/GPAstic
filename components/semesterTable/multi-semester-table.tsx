@@ -17,6 +17,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 // Define the structure for all semester data
 type AllSemesterData = {
@@ -189,23 +197,20 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* CGPA Display with Reset All Button */}
-      <div className="flex flex-col bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
-        <div className="text-center">
-          <div className="flex flex-col gap-3 justify-between items-start mb-3 sm:flex-row sm:items-end">
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-800 sm:pl-32">
-                Cumulative Grade Point Average (CGPA)
-              </h1>
-            </div>
+      <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+        <CardHeader>
+          <CardTitle className="text-xl text-gray-800 text-center sm:pl-30 sm:text-2xl">
+            Cumulative Grade Point Average (CGPA)
+          </CardTitle>
+          <CardAction>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="flex w-full items-center gap-2 sm:w-auto"
+                  className="items-center gap-2 hidden sm:flex  "
                 >
                   <RotateCcw className="h-4 w-4" />
-                  Reset All
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -218,47 +223,79 @@ export function MultiSemesterTable() {
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={resetAllSemesters}
-                    className="bg-red-600 hover:bg-red-700"
+                    className="bg-red-600 hover:bg-red-700 py-6  "
                   >
                     Reset All Data
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          </div>
-
-          <div className="text-4xl font-bold text-green-600 mb-2">
+          </CardAction>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-4xl font-bold text-green-600 mb-4 sm:text-5xl">
             {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
           </div>
-          <div className="flex justify-center items-center gap-6 text-sm text-gray-600">
+          <div className="flex justify-center items-center gap-6 text-sm text-gray-600 mb-4 sm:text-base">
             <div className="flex items-center gap-2">
               <span className="font-medium">Completed Semesters:</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold">
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-[0.625rem] font-semibold">
                 {cgpa.completedSemesters}/8
               </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="font-medium">Total Credits:</span>
-              <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-semibold">
+              <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-[0.625rem] font-semibold">
                 {cgpa.totalCredits}
               </span>
             </div>
           </div>
-          <p className="text-sm text-gray-500 mt-2">
+          <CardDescription className="mb-4 sm:text-base">
             {cgpa.cgpa > 0
               ? `Based on ${cgpa.completedSemesters} completed semester${
                   cgpa.completedSemesters !== 1 ? "s" : ""
                 }`
               : "Complete semester details to calculate CGPA"}
-          </p>
-        </div>
-      </div>
+          </CardDescription>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="destructive"
+                size="sm"
+                className=" w-full items-center gap-2 flex sm:hidden py-6"
+              >
+                <RotateCcw className="h-4 w-4" />
+                Reset
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action will permanently delete all data from all 8
+                  semesters. This cannot be undone. Are you sure you want to
+                  continue?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={resetAllSemesters}
+                  className="bg-red-600 hover:bg-red-700 py-6 "
+                >
+                  Reset All Data
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </CardContent>
+      </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className=" grid w-full h-30 grid-cols-4 grid-rows-2 sm:grid-cols-8 sm:grid-rows-1 sm:h-full gap-1">
+        <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
           {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
             const semesterKey = `semester-${semesterNum}`;
             const semesterData = getSemesterData(semesterKey);
@@ -269,18 +306,16 @@ export function MultiSemesterTable() {
               <TabsTrigger
                 key={semesterKey}
                 value={semesterKey}
-                className={`text-xs sm:text-sm relative ${
-                  hasData ? "bg-green-50 data-[state=active]:bg-green-100" : ""
-                }`}
+                className={`text-xs sm:text-sm relative`}
               >
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center ">
                   <span className="text-[14px] sm:text-base ">
                     Sem {semesterNum}
                   </span>
                   <span
-                    className={`text-[10px] font-semibold ${
+                    className={`text-[12px] font-semibold  ${
                       hasData ? "text-green-600" : "text-gray-400"
-                    } sm:text-[12px]`}
+                    } sm:text-[14px]`}
                   >
                     {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
                   </span>
@@ -293,7 +328,7 @@ export function MultiSemesterTable() {
         {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
           const semesterKey = `semester-${semesterNum}`;
           return (
-            <TabsContent key={semesterKey} value={semesterKey} className="mt-6">
+            <TabsContent key={semesterKey} value={semesterKey} className="mt-2">
               <SemesterTable
                 semesterNumber={semesterNum}
                 data={getSemesterData(semesterKey)}

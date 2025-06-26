@@ -28,6 +28,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -70,24 +78,21 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       {/* SGPA Display with Reset Button */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
-        <div className="text-center">
-          <div className="flex flex-col gap-3 justify-between items-center mb-3 sm:flex-row sm:items-end">
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold text-gray-700 sm:pl-32">
-                Semester {semesterNumber} - Grade Point Average (SGPA)
-              </h2>
-            </div>
-            {hasData && (
+      <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+        <CardHeader>
+          <CardTitle className="text-xl text-gray-700 text-center  sm:pl-30 sm:text-2xl">
+            Semester {semesterNumber} - Grade Point Average (SGPA)
+          </CardTitle>
+          {hasData && (
+            <CardAction>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button
                     variant="destructive"
                     size="sm"
-                    className="flex w-full items-center gap-2 sm:w-auto"
+                    className="items-center gap-2 hidden sm:flex "
                   >
                     <RotateCcw className="h-4 w-4" />
-                    Reset Sem
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -102,29 +107,67 @@ export function DataTable<TData, TValue>({
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel className="py-6">
+                      Cancel
+                    </AlertDialogCancel>
                     <AlertDialogAction
                       onClick={onResetSemester}
-                      className="bg-red-600 hover:bg-red-700"
+                      className="bg-red-600 hover:bg-red-700 py-6"
                     >
                       Reset Semester
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            )}
-          </div>
-
-          <div className="text-3xl font-bold text-blue-600">
+            </CardAction>
+          )}
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-4xl font-bold text-blue-600 mb-4 sm:text-5xl">
             {sgpa !== undefined && sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
           </div>
-          <p className="text-sm text-gray-500 mt-1">
+          <CardDescription className="mb-4 sm:text-base">
             {sgpa !== undefined && sgpa > 0
               ? "Based on completed modules"
               : "Complete module details to calculate SGPA"}
-          </p>
-        </div>
-      </div>
+          </CardDescription>
+          {hasData && (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="flex  w-full items-center gap-2 sm:hidden py-6"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  Reset
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Reset Semester {semesterNumber}
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will permanently delete all data from Semester{" "}
+                    {semesterNumber}. This cannot be undone. Are you sure you
+                    want to continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={onResetSemester}
+                    className="bg-red-600 hover:bg-red-700 py-6"
+                  >
+                    Reset Semester
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="rounded-md border">
         <Table>
@@ -133,7 +176,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className=" sm:text-base sm:font-semibold sm:py-4"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -154,7 +200,7 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="sm:py-4">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -177,12 +223,12 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <Button
           onClick={onAddRow}
           disabled={hasEmptyRow}
           variant="outline"
-          className="w-full max-w-full flex items-center gap-2"
+          className="w-full max-w-full flex items-center gap-2 py-6 sm:py-8 !text-sm sm:!text-base"
         >
           <CirclePlus className="h-4 w-4" />
           Add Module

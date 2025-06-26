@@ -39,7 +39,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className="border p-1 rounded"
+          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
           placeholder="Enter module name"
         />
       );
@@ -59,7 +59,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className="border p-1 rounded"
+          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
           placeholder="Enter module code"
         />
       );
@@ -84,7 +84,7 @@ export const columns: ColumnDef<Semester>[] = [
           type="number"
           value={value === 0 ? "" : value.toString()}
           onChange={handleChange}
-          className="border p-1 rounded"
+          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
           placeholder="0"
           min="0"
           step="0.5"
@@ -102,7 +102,7 @@ export const columns: ColumnDef<Semester>[] = [
       };
       return (
         <Select value={value || ""} onValueChange={handleChange}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full !text-sm sm:!text-base">
             <SelectValue placeholder="Select grade" />
           </SelectTrigger>
           <SelectContent>
@@ -120,7 +120,11 @@ export const columns: ColumnDef<Semester>[] = [
               "D",
               "E-",
             ].map((gradeOption) => (
-              <SelectItem key={gradeOption} value={gradeOption}>
+              <SelectItem
+                key={gradeOption}
+                value={gradeOption}
+                className="!text-sm sm:!text-base"
+              >
                 {gradeOption}
               </SelectItem>
             ))}
@@ -138,7 +142,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           type="number"
           value={value?.toFixed(2) || "0.00"}
-          className="border p-1 rounded"
+          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
           disabled
           readOnly
         />
