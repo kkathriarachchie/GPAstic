@@ -39,7 +39,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module name"
         />
       );
@@ -59,7 +59,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module code"
         />
       );
@@ -84,7 +84,7 @@ export const columns: ColumnDef<Semester>[] = [
           type="number"
           value={value === 0 ? "" : value.toString()}
           onChange={handleChange}
-          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="0"
           min="0"
           step="0.5"
@@ -142,7 +142,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           type="number"
           value={value?.toFixed(2) || "0.00"}
-          className="border p-1 rounded border-none shadow-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base"
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1  sm:!rounded-[8px] !rounded-[8px]  "
           disabled
           readOnly
         />

@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { RotateCcw, CirclePlus } from "lucide-react";
+import { RotateCcw, CirclePlus, Trash, TrashIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -78,69 +78,21 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       {/* SGPA Display with Reset Button */}
-      <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-700 text-center  sm:pl-30 sm:text-2xl">
-            Semester {semesterNumber} - Grade Point Average (SGPA)
+      <Card>
+        <CardHeader className="grid grid-cols-1 sm:grid-cols-2 items-center justify-between">
+          <CardTitle className="text-5xl text-center sm:pl-12 sm:text-6xl">
+            SGPA-{semesterNumber}
           </CardTitle>
-          {hasData && (
-            <CardAction>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    className="items-center gap-2 hidden sm:flex "
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Reset Semester {semesterNumber}
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action will permanently delete all data from Semester{" "}
-                      {semesterNumber}. This cannot be undone. Are you sure you
-                      want to continue?
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel className="py-6">
-                      Cancel
-                    </AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={onResetSemester}
-                      className="bg-red-600 hover:bg-red-700 py-6"
-                    >
-                      Reset Semester
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            </CardAction>
-          )}
-        </CardHeader>
-        <CardContent className="text-center">
-          <div className="text-4xl font-bold text-blue-600 mb-4 sm:text-5xl">
-            {sgpa !== undefined && sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
-          </div>
-          <CardDescription className="mb-4 sm:text-base">
-            {sgpa !== undefined && sgpa > 0
-              ? "Based on completed modules"
-              : "Complete module details to calculate SGPA"}
-          </CardDescription>
-          {hasData && (
+
+          <CardAction>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="flex  w-full items-center gap-2 sm:hidden py-6"
+                  className="items-center gap-2 flex "
                 >
-                  <RotateCcw className="h-4 w-4" />
-                  Reset
+                  <TrashIcon className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -158,14 +110,24 @@ export function DataTable<TData, TValue>({
                   <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={onResetSemester}
-                    className="bg-red-600 hover:bg-red-700 py-6"
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
                   >
                     Reset Semester
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          )}
+          </CardAction>
+        </CardHeader>
+        <CardContent className="text-center">
+          <div className="text-4xl font-bold text-blue-600 mb-4 sm:text-5xl">
+            {sgpa !== undefined && sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
+          </div>
+          <CardDescription className="mb-4 sm:text-base">
+            {sgpa !== undefined && sgpa > 0
+              ? "Based on completed modules"
+              : "Complete module details to calculate SGPA"}
+          </CardDescription>
         </CardContent>
       </Card>
 
@@ -200,7 +162,10 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="sm:py-4">
+                    <TableCell
+                      key={cell.id}
+                      className="!py-3 !px-3 sm:!py-4  sm:!px-4"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -227,7 +192,6 @@ export function DataTable<TData, TValue>({
         <Button
           onClick={onAddRow}
           disabled={hasEmptyRow}
-          variant="outline"
           className="w-full max-w-full flex items-center gap-2 py-6 sm:py-8 !text-sm sm:!text-base"
         >
           <CirclePlus className="h-4 w-4" />

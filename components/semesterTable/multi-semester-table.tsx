@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { SemesterTable } from "./semester-table";
 import { Semester } from "./columns";
-import { RotateCcw, Trash2 } from "lucide-react";
+import { RotateCcw, Trash2, TrashIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -197,10 +197,10 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* CGPA Display with Reset All Button */}
-      <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-800 text-center sm:pl-30 sm:text-2xl">
-            Cumulative Grade Point Average (CGPA)
+      <Card>
+        <CardHeader className="grid grid-cols-1 sm:grid-cols-2 items-center justify-between">
+          <CardTitle className="text-5xl text-center sm:pl-12 sm:text-6xl">
+            CGPA
           </CardTitle>
           <CardAction>
             <AlertDialog>
@@ -208,9 +208,9 @@ export function MultiSemesterTable() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="items-center gap-2 hidden sm:flex  "
+                  className="items-center gap-2  flex  "
                 >
-                  <RotateCcw className="h-4 w-4" />
+                  <TrashIcon className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -226,7 +226,7 @@ export function MultiSemesterTable() {
                   <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={resetAllSemesters}
-                    className="bg-red-600 hover:bg-red-700 py-6  "
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
                   >
                     Reset All Data
                   </AlertDialogAction>
@@ -260,42 +260,11 @@ export function MultiSemesterTable() {
                 }`
               : "Complete semester details to calculate CGPA"}
           </CardDescription>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="destructive"
-                size="sm"
-                className=" w-full items-center gap-2 flex sm:hidden py-6"
-              >
-                <RotateCcw className="h-4 w-4" />
-                Reset
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action will permanently delete all data from all 8
-                  semesters. This cannot be undone. Are you sure you want to
-                  continue?
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={resetAllSemesters}
-                  className="bg-red-600 hover:bg-red-700 py-6 "
-                >
-                  Reset All Data
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
         </CardContent>
       </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
+        <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:rounded-full sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
           {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
             const semesterKey = `semester-${semesterNum}`;
             const semesterData = getSemesterData(semesterKey);
@@ -306,7 +275,15 @@ export function MultiSemesterTable() {
               <TabsTrigger
                 key={semesterKey}
                 value={semesterKey}
-                className={`text-xs sm:text-sm relative`}
+                className={`text-xs sm:text-sm relative
+    data-[state=active]:shadow-sm
+    transition-colors duration-200
+    sm:rounded-full
+    sm:h-full
+    sm:px-4
+    sm:py-2
+    
+    `}
               >
                 <div className="flex flex-col items-center ">
                   <span className="text-[14px] sm:text-base ">
