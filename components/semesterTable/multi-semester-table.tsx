@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { SemesterTable } from "./semester-table";
 import { Semester } from "./columns";
-import { RotateCcw, Trash2, TrashIcon } from "lucide-react";
+import { Trash2, TrashIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -192,7 +192,7 @@ export function MultiSemesterTable() {
       completedSemesters,
       totalCredits,
     };
-  }, [allSemesterData, gradePoints]);
+  }, [allSemesterData, gradePoints, calculateSemesterSGPA, getSemesterData]);
 
   return (
     <div className="w-full space-y-6">
@@ -208,9 +208,9 @@ export function MultiSemesterTable() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="items-center gap-2  flex  "
+                  className="items-center gap-2  flex h-8 w-8 p-0 "
                 >
-                  <TrashIcon className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -242,13 +242,13 @@ export function MultiSemesterTable() {
           <div className="flex justify-center items-center gap-6 text-sm text-gray-600 mb-4 sm:text-base">
             <div className="flex items-center gap-2">
               <span className="font-medium">Completed Semesters:</span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-[0.625rem] font-semibold">
+              <span className="bg-[#ffe0d6] text-[#ff5100] px-2 py-1 rounded-[0.625rem] font-semibold">
                 {cgpa.completedSemesters}/8
               </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="font-medium">Total Credits:</span>
-              <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-[0.625rem] font-semibold">
+              <span className="bg-[#ffe0d6] text-[#ff5100] px-2 py-1 rounded-[0.625rem] font-semibold">
                 {cgpa.totalCredits}
               </span>
             </div>
@@ -269,15 +269,18 @@ export function MultiSemesterTable() {
             const semesterKey = `semester-${semesterNum}`;
             const semesterData = getSemesterData(semesterKey);
             const { sgpa } = calculateSemesterSGPA(semesterData);
-            const hasData = sgpa > 0;
+            //const hasData = sgpa > 0;
 
             return (
               <TabsTrigger
                 key={semesterKey}
                 value={semesterKey}
                 className={`text-xs sm:text-sm relative
+    data-[state=active]:bg-primary
+    data-[state=active]:text-primary-foreground
     data-[state=active]:shadow-sm
     transition-colors duration-200
+    hover:bg-primary/15
     sm:rounded-full
     sm:h-full
     sm:px-4
@@ -290,9 +293,7 @@ export function MultiSemesterTable() {
                     Sem {semesterNum}
                   </span>
                   <span
-                    className={`text-[12px] font-semibold  ${
-                      hasData ? "text-green-600" : "text-gray-400"
-                    } sm:text-[14px]`}
+                    className={`text-[12px] font-semibold   sm:text-[14px]`}
                   >
                     {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
                   </span>

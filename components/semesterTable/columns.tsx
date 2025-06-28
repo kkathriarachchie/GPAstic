@@ -2,6 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -21,6 +23,7 @@ export type Semester = {
 declare module "@tanstack/react-table" {
   interface TableMeta<TData> {
     updateData?: (rowIndex: number, updates: Partial<TData>) => void;
+    removeData?: (rowIndex: number) => void;
   }
 }
 
@@ -39,7 +42,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module name"
         />
       );
@@ -59,7 +62,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module code"
         />
       );
@@ -84,7 +87,7 @@ export const columns: ColumnDef<Semester>[] = [
           type="number"
           value={value === 0 ? "" : value.toString()}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1 focus:!ring-[#9b2c2c]  sm:!rounded-[8px] !rounded-[8px]  "
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="0"
           min="0"
           step="0.5"
@@ -136,16 +139,35 @@ export const columns: ColumnDef<Semester>[] = [
   {
     accessorKey: "creditPoint",
     header: "Credit Point",
-    cell: ({ row, getValue }) => {
+    cell: ({ getValue }) => {
       const value = getValue() as number;
       return (
         <Input
           type="number"
           value={value?.toFixed(2) || "0.00"}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-1  sm:!rounded-[8px] !rounded-[8px]  "
+          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           disabled
           readOnly
         />
+      );
+    },
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row, table }) => {
+      const handleRemove = () => {
+        table.options.meta?.removeData?.(row.index);
+      };
+      return (
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={handleRemove}
+          className="h-8 w-8 p-0"
+        >
+          <Trash2 className="h-4 w-4" />
+        </Button>
       );
     },
   },

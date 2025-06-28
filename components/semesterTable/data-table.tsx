@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { RotateCcw, CirclePlus, Trash, TrashIcon } from "lucide-react";
+import { CirclePlus, Trash2, TrashIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,6 +43,7 @@ interface DataTableProps<TData, TValue> {
   onAddRow?: () => void;
   sgpa?: number;
   updateData?: (rowIndex: number, updates: Partial<TData>) => void;
+  removeData?: (rowIndex: number) => void;
   semesterNumber?: number;
   onResetSemester?: () => void;
 }
@@ -53,6 +54,7 @@ export function DataTable<TData, TValue>({
   onAddRow,
   sgpa,
   updateData,
+  removeData,
   semesterNumber,
   onResetSemester,
 }: DataTableProps<TData, TValue>) {
@@ -62,17 +64,24 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     meta: {
       updateData,
+      removeData,
     },
   });
 
   // Check if there are any empty rows
-  const hasEmptyRow = data.some((row: any) => {
-    return !row.moduleName || !row.moduleCode || !row.credit || !row.grade;
-  });
-
-  // Check if semester has any data
-  const hasData = data.some((row: any) => {
-    return row.moduleName || row.moduleCode || row.credit > 0 || row.grade;
+  const hasEmptyRow = data.some((row) => {
+    const semesterRow = row as {
+      moduleName?: string;
+      moduleCode?: string;
+      credit?: number;
+      grade?: string;
+    };
+    return (
+      !semesterRow.moduleName ||
+      !semesterRow.moduleCode ||
+      !semesterRow.credit ||
+      !semesterRow.grade
+    );
   });
 
   return (
@@ -90,9 +99,9 @@ export function DataTable<TData, TValue>({
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="items-center gap-2 flex "
+                  className="items-center gap-2 flex h-8 w-8 p-0"
                 >
-                  <TrashIcon className="h-4 w-4" />
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
@@ -131,63 +140,69 @@ export function DataTable<TData, TValue>({
         </CardContent>
       </Card>
 
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      className=" sm:text-base sm:font-semibold sm:py-4"
+      <Card className="w-full">
+        <CardContent className="px-6">
+          <div className="rounded-md border-0">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow
+                    key={headerGroup.id}
+                    className="hover:bg-transparent"
+                  >
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead
+                          key={header.id}
+                          className="font-semibold  sm:text-base sm:font-semibold !py-3 !px-3 sm:!py-4 sm:!px-4 "
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          className="!py-3 !px-3 sm:!py-4  sm:!px-4"
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
                           )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
                     <TableCell
-                      key={cell.id}
-                      className="!py-3 !px-3 sm:!py-4  sm:!px-4"
+                      colSpan={columns.length}
+                      className="h-24 text-center"
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      No results.
                     </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
       <div className="flex justify-center ">
         <Button
           onClick={onAddRow}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { DataTable } from "./data-table";
 import { columns, Semester } from "./columns";
 
@@ -18,7 +18,7 @@ export function SemesterTable({
   onResetSemester,
 }: SemesterTableProps) {
   // Grade points mapping
-  const gradePoints: { [key: string]: number } = {
+  const gradePoints = useMemo(() => ({
     "A+": 4.0,
     A: 4.0,
     "A-": 3.7,
@@ -31,7 +31,7 @@ export function SemesterTable({
     "D+": 1.3,
     D: 1.0,
     "E-": 0.0,
-  };
+  } as Record<string, number>), []);
 
   const updateData = (rowIndex: number, updates: Partial<Semester>) => {
     const newData = data.map((row, index) => {
@@ -48,6 +48,15 @@ export function SemesterTable({
       }
       return row;
     });
+    onDataChange(newData);
+  };
+
+  const removeData = (rowIndex: number) => {
+    // Don't allow removing the last row - always keep at least one row
+    if (data.length <= 1) {
+      return;
+    }
+    const newData = data.filter((_, index) => index !== rowIndex);
     onDataChange(newData);
   };
 
@@ -100,6 +109,7 @@ export function SemesterTable({
       onAddRow={addNewRow}
       sgpa={sgpa}
       updateData={updateData}
+      removeData={removeData}
       semesterNumber={semesterNumber}
       onResetSemester={onResetSemester}
     />
