@@ -459,10 +459,10 @@ This is exsisting
   --muted-foreground: oklch(0.4444 0.0096 73.639);
   --accent: oklch(0.9245 0.0138 92.9892);
   --accent-foreground: oklch(0.3353 0.0132 2.7676);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.583 0.2387 28.4765);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.8677 0.0367 39.3066);
-  --input: oklch(0.9296 0.037 38.6868);
+  --border: oklch(0.7799 0.1206 45.761);
+  --input: oklch(0.7799 0.1206 45.761);
   --ring: oklch(0.6717 0.2205 37.8643);
   --chart-1: oklch(0.6717 0.2205 37.8643);
   --chart-2: oklch(0.8278 0.1131 57.9984);
@@ -477,7 +477,7 @@ This is exsisting
   --sidebar-accent-foreground: oklch(0.3353 0.0132 2.7676);
   --sidebar-border: oklch(0.9296 0.037 38.6868);
   --sidebar-ring: oklch(0.6717 0.2205 37.8643);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-baloo-bhaijaan);
   --font-mono: var(--font-geist-mono);
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
@@ -530,7 +530,7 @@ This is exsisting
   --sidebar-accent-foreground: oklch(0.8823 0.0571 254.1284);
   --sidebar-border: oklch(0.3843 0.0301 269.7337);
   --sidebar-ring: oklch(0.6397 0.172 36.4421);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-baloo-bhaijaan);
   --font-mono: var(--font-geist-mono);
   --radius: 1.4rem;
   --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
@@ -582,7 +582,7 @@ This is exsisting
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-baloo-bhaijaan);
   --font-mono: var(--font-geist-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -606,15 +606,6 @@ This is exsisting
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
 }
-
-body {
-  letter-spacing: var(--tracking-normal);
-}
-
-body {
-  letter-spacing: var(--tracking-normal);
-}
-
 body {
   letter-spacing: var(--tracking-normal);
 }

@@ -42,7 +42,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
+          className="font-bold p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module name"
         />
       );
@@ -62,7 +62,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           value={value || ""}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
+          className="font-bold p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="Enter module code"
         />
       );
@@ -87,7 +87,7 @@ export const columns: ColumnDef<Semester>[] = [
           type="number"
           value={value === 0 ? "" : value.toString()}
           onChange={handleChange}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
+          className="font-bold p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2 sm:!rounded-[8px] !rounded-[8px]  "
           placeholder="0"
           min="0"
           step="0.5"
@@ -105,10 +105,10 @@ export const columns: ColumnDef<Semester>[] = [
       };
       return (
         <Select value={value || ""} onValueChange={handleChange}>
-          <SelectTrigger className="w-full !text-sm sm:!text-base">
+          <SelectTrigger className="font-bold w-full !text-sm sm:!text-base border-2">
             <SelectValue placeholder="Select grade" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="font-bold">
             {[
               "A+",
               "A",
@@ -145,7 +145,7 @@ export const columns: ColumnDef<Semester>[] = [
         <Input
           type="number"
           value={value?.toFixed(2) || "0.00"}
-          className=" p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
+          className="font-bold p-1 border-none !text-sm sm:!text-base placeholder:!text-sm sm:placeholder:!text-base shadow-none focus:!ring-2   sm:!rounded-[8px] !rounded-[8px]  "
           disabled
           readOnly
         />

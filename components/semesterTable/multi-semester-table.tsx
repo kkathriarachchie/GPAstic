@@ -197,71 +197,141 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* CGPA Display with Reset All Button */}
-      <Card>
-        <CardHeader className="grid grid-cols-1 sm:grid-cols-2 items-center justify-between">
-          <CardTitle className="text-5xl text-center sm:pl-12 sm:text-6xl">
-            CGPA
-          </CardTitle>
-          <CardAction>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  className="items-center gap-2  flex h-8 w-8 p-0 "
+      <div className="w-full space-y-6">
+        {/* Header Section with Title and Reset Button */}
+        <div className="flex items-center justify-between bg-card rounded-lg p-4 shadow-sm border">
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center">
+              GPA Calculator Dashboard
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground text-center mt-2">
+              {cgpa.cgpa > 0
+                ? `Based on ${cgpa.completedSemesters} completed semester${
+                    cgpa.completedSemesters !== 1 ? "s" : ""
+                  }`
+                : "Complete semester details to calculate CGPA"}
+            </p>
+          </div>
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="destructive"
+                size="sm"
+                className="items-center gap-2 flex h-10 w-10 p-0 ml-4"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action will permanently delete all data from all 8
+                  semesters. This cannot be undone. Are you sure you want to
+                  continue?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={resetAllSemesters}
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
                 >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action will permanently delete all data from all 8
-                    semesters. This cannot be undone. Are you sure you want to
-                    continue?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={resetAllSemesters}
-                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
-                  >
-                    Reset All Data
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </CardAction>
-        </CardHeader>
-        <CardContent className="text-center">
-          <div className="text-4xl font-bold text-green-600 mb-4 sm:text-5xl">
-            {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
-          </div>
-          <div className="flex justify-center items-center gap-6 text-sm text-gray-600 mb-4 sm:text-base">
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Completed Semesters:</span>
-              <span className="bg-[#ffe0d6] text-[#ff5100] px-2 py-1 rounded-[0.625rem] font-semibold">
-                {cgpa.completedSemesters}/8
-              </span>
+                  Reset All Data
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+
+        {/* Stats Cards Section */}
+        <div className="space-y-4">
+          {/* Mobile Layout (< sm) - CGPA at top, then stats below */}
+          <div className="sm:hidden flex flex-col space-y-4">
+            {/* CGPA Card - Top on mobile */}
+            <Card className="p-6  bg-foreground text-white shadow-lg border-none">
+              <div className="text-center">
+                <div className="text-5xl font-bold mb-2 text-[#00ff9c]">
+                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
+                </div>
+                <span className="text-lg font-semibold ">
+                  {cgpa.cgpa > 0
+                    ? `Based on ${cgpa.completedSemesters} completed semester${
+                        cgpa.completedSemesters !== 1 ? "s" : ""
+                      }`
+                    : "Complete semester details to calculate CGPA"}
+                </span>
+              </div>
+            </Card>
+
+            {/* Stats Cards - Below CGPA on mobile */}
+            <div className="grid grid-cols-1 gap-4">
+              <Card className="p-6  bg-primary text-white shadow-lg border-none">
+                <div className="text-center">
+                  <div className="text-5xl font-bold mb-2">
+                    {cgpa.completedSemesters}/8
+                  </div>
+                  <span className="text-lg font-semibold">
+                    Completed Semesters
+                  </span>
+                </div>
+              </Card>
+              <Card className="p-6  bg-primary text-white shadow-lg border-none">
+                <div className="text-center">
+                  <div className="text-5xl font-bold mb-2">
+                    {cgpa.totalCredits}
+                  </div>
+                  <span className="text-lg font-semibold">Total Credits</span>
+                </div>
+              </Card>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium">Total Credits:</span>
-              <span className="bg-[#ffe0d6] text-[#ff5100] px-2 py-1 rounded-[0.625rem] font-semibold">
-                {cgpa.totalCredits}
-              </span>
-            </div>
           </div>
-          <CardDescription className="mb-4 sm:text-base">
-            {cgpa.cgpa > 0
-              ? `Based on ${cgpa.completedSemesters} completed semester${
-                  cgpa.completedSemesters !== 1 ? "s" : ""
-                }`
-              : "Complete semester details to calculate CGPA"}
-          </CardDescription>
-        </CardContent>
-      </Card>
+
+          {/* Desktop Layout (>= sm) - Stats on sides, CGPA in middle */}
+          <div className="hidden sm:flex sm:items-stretch sm:justify-between sm:gap-6 w-full">
+            {/* Left Stats Card */}
+            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-4 h-full">
+                <span className="text-5xl lg:text-6xl text-white font-bold">
+                  {cgpa.completedSemesters}/8
+                </span>
+                <span className="font-semibold text-white text-center text-lg lg:text-xl">
+                  Completed Semesters
+                </span>
+              </div>
+            </Card>
+
+            {/* Center CGPA Card */}
+            <Card className="border-none flex-1 p-8 bg-foreground text-white min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-3 h-full">
+                <div className="text-6xl lg:text-7xl font-bold text-center text-[#00ff9c]">
+                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
+                </div>
+                <span className="font-bold text-lg lg:text-xl text-center border-none">
+                  {cgpa.cgpa > 0
+                    ? `Based on ${cgpa.completedSemesters} completed semester${
+                        cgpa.completedSemesters !== 1 ? "s" : ""
+                      }`
+                    : "Complete semester details to calculate CGPA"}
+                </span>
+              </div>
+            </Card>
+
+            {/* Right Stats Card */}
+            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-4 h-full">
+                <span className="text-5xl lg:text-6xl text-white font-bold">
+                  {cgpa.totalCredits}
+                </span>
+                <span className="font-semibold text-white text-center text-lg lg:text-xl">
+                  Total Credits
+                </span>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:rounded-full sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
@@ -289,12 +359,10 @@ export function MultiSemesterTable() {
     `}
               >
                 <div className="flex flex-col items-center ">
-                  <span className="text-[14px] sm:text-base ">
+                  <span className="!text-[15px] sm:!text-base font-bold ">
                     Sem {semesterNum}
                   </span>
-                  <span
-                    className={`text-[12px] font-semibold   sm:text-[14px]`}
-                  >
+                  <span className={`text-[14px] !font-semibold   sm:text-base`}>
                     {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
                   </span>
                 </div>

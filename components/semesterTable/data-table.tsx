@@ -87,12 +87,8 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       {/* SGPA Display with Reset Button */}
-      <Card>
+      <Card className="bg-foreground border-none gap-2">
         <CardHeader className="grid grid-cols-1 sm:grid-cols-2 items-center justify-between">
-          <CardTitle className="text-5xl text-center sm:pl-12 sm:text-6xl">
-            SGPA-{semesterNumber}
-          </CardTitle>
-
           <CardAction>
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -129,10 +125,13 @@ export function DataTable<TData, TValue>({
           </CardAction>
         </CardHeader>
         <CardContent className="text-center">
-          <div className="text-4xl font-bold text-blue-600 mb-4 sm:text-5xl">
+          <div className="text-5xl text-center font-bold sm:text-6xl text-primary-foreground">
+            Sem-{semesterNumber}
+          </div>
+          <div className="text-5xl font-bold text-[#00FF9C] mb-4 sm:text-6xl">
             {sgpa !== undefined && sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
           </div>
-          <CardDescription className="mb-4 sm:text-base">
+          <CardDescription className="mb-4 text-background font-bold text-lg lg:text-xl text-center border-none">
             {sgpa !== undefined && sgpa > 0
               ? "Based on completed modules"
               : "Complete module details to calculate SGPA"}
@@ -140,7 +139,7 @@ export function DataTable<TData, TValue>({
         </CardContent>
       </Card>
 
-      <Card className="w-full">
+      <Card className="w-full bg-muted border-none">
         <CardContent className="px-6">
           <div className="rounded-md border-0">
             <Table>
@@ -154,7 +153,7 @@ export function DataTable<TData, TValue>({
                       return (
                         <TableHead
                           key={header.id}
-                          className="font-semibold  sm:text-base sm:font-semibold !py-3 !px-3 sm:!py-4 sm:!px-4 "
+                          className="!font-bold  sm:text-lg sm:!font-bold !py-3 !px-3 sm:!py-4 sm:!px-4 "
                         >
                           {header.isPlaceholder
                             ? null
@@ -178,7 +177,7 @@ export function DataTable<TData, TValue>({
                       {row.getVisibleCells().map((cell) => (
                         <TableCell
                           key={cell.id}
-                          className="!py-3 !px-3 sm:!py-4  sm:!px-4"
+                          className="!py-3 !px-3 sm:!py-4  sm:!px-4 "
                         >
                           {flexRender(
                             cell.column.columnDef.cell,
@@ -207,10 +206,10 @@ export function DataTable<TData, TValue>({
         <Button
           onClick={onAddRow}
           disabled={hasEmptyRow}
-          className="w-full max-w-full flex items-center gap-2 py-6 sm:py-8 !text-sm sm:!text-base"
+          className="font-bold w-full max-w-full flex items-center gap-2 py-6 sm:py-8 !text-sm sm:!text-base"
         >
-          <CirclePlus className="h-4 w-4" />
-          Add Module
+          <CirclePlus className="!h-4 !w-4 sm:!h-5 sm:!w-5" />
+          <span>Add Module</span>
         </Button>
       </div>
     </div>
