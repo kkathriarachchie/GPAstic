@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { SemesterTable } from "./semester-table";
 import { Semester } from "./columns";
-import { Trash2, TrashIcon } from "lucide-react";
+import { CirclePlus, Import, Save, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,14 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card } from "../ui/card";
 
 // Define the structure for all semester data
 type AllSemesterData = {
@@ -198,51 +191,67 @@ export function MultiSemesterTable() {
     <div className="w-full space-y-6">
       {/* CGPA Display with Reset All Button */}
       <div className="w-full space-y-6">
-        {/* Header Section with Title and Reset Button */}
-        <div className="flex items-center justify-between bg-card rounded-lg p-4 shadow-sm border">
-          <div className="flex-1">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center">
-              GPA Calculator Dashboard
-            </h2>
-            <p className="text-sm sm:text-base text-muted-foreground text-center mt-2">
-              {cgpa.cgpa > 0
-                ? `Based on ${cgpa.completedSemesters} completed semester${
-                    cgpa.completedSemesters !== 1 ? "s" : ""
-                  }`
-                : "Complete semester details to calculate CGPA"}
-            </p>
-          </div>
+        {/* Title Section */}
+        <div className="text-center space-y-4">
+          <h2 className="text-5xl sm:text-7xl font-bold text-foreground">
+            GPA Calculator
+          </h2>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:justify-center max-w-2xl mx-auto">
+            {/* Import Button - Blue/Primary variant */}
+            <Button
+              variant="default"
+              className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row  flex-1 shadow-lg hover:shadow-xl transition-all duration-200"
+            >
+              <Import className="h-5 w-5" />
+              <span>Import</span>
+            </Button>
 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="destructive"
-                size="sm"
-                className="items-center gap-2 flex h-10 w-10 p-0 ml-4"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action will permanently delete all data from all 8
-                  semesters. This cannot be undone. Are you sure you want to
-                  continue?
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={resetAllSemesters}
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+            {/* Load Button - Green/Success variant */}
+            <Button
+              variant="secondary"
+              className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row flex-1 shadow-lg hover:shadow-xl transition-all duration-200"
+            >
+              <Save className="h-5 w-5" />
+              <span>Saved</span>
+            </Button>
+
+            {/* Reset Button - Red/Destructive variant */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row flex-1 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                 >
-                  Reset All Data
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                  <Trash2 className="h-5 w-5" />
+                  <span>Reset</span>
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will permanently delete all data from all 8
+                    semesters. This cannot be undone. Are you sure you want to
+                    continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={resetAllSemesters}
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+                  >
+                    Reset All Data
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+          <p className="text-muted-foreground text-base sm:text-xl font-medium max-w-2xl mx-auto">
+            Enter your module details for each semester or import your saved
+            module to calculate your Grade Point Average
+          </p>
         </div>
 
         {/* Stats Cards Section */}

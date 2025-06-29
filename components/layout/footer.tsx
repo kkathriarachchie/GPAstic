@@ -12,9 +12,7 @@ export function Footer() {
             <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">GPA</span>
             </div>
-            <span className="text-xl font-semibold text-primary">
-              GPA Calculator
-            </span>
+            <span className="text-xl font-semibold text-primary">GPAstic</span>
           </div>
 
           {/* Navigation Links */}
