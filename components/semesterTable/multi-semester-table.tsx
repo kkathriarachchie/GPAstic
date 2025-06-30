@@ -2,21 +2,10 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+
 import { SemesterTable } from "./semester-table";
 import { Semester } from "./columns";
-import { CirclePlus, Import, Save, Trash2 } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import { Card } from "../ui/card";
 
 // Define the structure for all semester data
@@ -120,12 +109,6 @@ export function MultiSemesterTable() {
     handleSemesterDataChange(semesterKey, emptyData);
   };
 
-  // Reset all semesters
-  const resetAllSemesters = () => {
-    initializeEmptyData();
-    localStorage.removeItem("gpa-calculator-data");
-  };
-
   // Calculate SGPA for a specific semester
   const calculateSemesterSGPA = (semesterData: Semester[]) => {
     const completeRows = semesterData.filter(
@@ -189,157 +172,16 @@ export function MultiSemesterTable() {
 
   return (
     <div className="w-full space-y-6">
-      {/* CGPA Display with Reset All Button */}
-      <div className="w-full space-y-6">
-        {/* Title Section */}
-        <div className="text-center space-y-4">
-          <h2 className="text-5xl sm:text-7xl font-bold text-foreground">
-            GPA Calculator
-          </h2>
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:justify-center max-w-2xl mx-auto">
-            {/* Import Button - Blue/Primary variant */}
-            <Button
-              variant="default"
-              className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row  flex-1 shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              <Import className="h-5 w-5" />
-              <span>Import</span>
-            </Button>
+      {/* Title Section */}
+      <div className="text-center space-y-4">
+        <h2 className="text-5xl sm:text-7xl font-bold text-foreground">
+          GPA Calculator
+        </h2>
 
-            {/* Load Button - Green/Success variant */}
-            <Button
-              variant="secondary"
-              className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row flex-1 shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              <Save className="h-5 w-5" />
-              <span>Saved</span>
-            </Button>
-
-            {/* Reset Button - Red/Destructive variant */}
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  variant="destructive"
-                  className="font-bold py-3 sm:py-6 items-center gap-3 flex flex-row flex-1 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-                >
-                  <Trash2 className="h-5 w-5" />
-                  <span>Reset</span>
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action will permanently delete all data from all 8
-                    semesters. This cannot be undone. Are you sure you want to
-                    continue?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={resetAllSemesters}
-                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
-                  >
-                    Reset All Data
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
-          <p className="text-muted-foreground text-base sm:text-xl font-medium max-w-2xl mx-auto">
-            Enter your module details for each semester or import your saved
-            module to calculate your Grade Point Average
-          </p>
-        </div>
-
-        {/* Stats Cards Section */}
-        <div className="space-y-4">
-          {/* Mobile Layout (< sm) - CGPA at top, then stats below */}
-          <div className="sm:hidden flex flex-col space-y-4">
-            {/* CGPA Card - Top on mobile */}
-            <Card className="p-6  bg-foreground text-white shadow-lg border-none">
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2 text-[#00ff9c]">
-                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
-                </div>
-                <span className="text-lg font-semibold ">
-                  {cgpa.cgpa > 0
-                    ? `Based on ${cgpa.completedSemesters} completed semester${
-                        cgpa.completedSemesters !== 1 ? "s" : ""
-                      }`
-                    : "Complete semester details to calculate CGPA"}
-                </span>
-              </div>
-            </Card>
-
-            {/* Stats Cards - Below CGPA on mobile */}
-            <div className="grid grid-cols-1 gap-4">
-              <Card className="p-6  bg-primary text-white shadow-lg border-none">
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2">
-                    {cgpa.completedSemesters}/8
-                  </div>
-                  <span className="text-lg font-semibold">
-                    Completed Semesters
-                  </span>
-                </div>
-              </Card>
-              <Card className="p-6  bg-primary text-white shadow-lg border-none">
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2">
-                    {cgpa.totalCredits}
-                  </div>
-                  <span className="text-lg font-semibold">Total Credits</span>
-                </div>
-              </Card>
-            </div>
-          </div>
-
-          {/* Desktop Layout (>= sm) - Stats on sides, CGPA in middle */}
-          <div className="hidden sm:flex sm:items-stretch sm:justify-between sm:gap-6 w-full">
-            {/* Left Stats Card */}
-            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex flex-col items-center justify-center gap-4 h-full">
-                <span className="text-5xl lg:text-6xl text-white font-bold">
-                  {cgpa.completedSemesters}/8
-                </span>
-                <span className="font-semibold text-white text-center text-lg lg:text-xl">
-                  Completed Semesters
-                </span>
-              </div>
-            </Card>
-
-            {/* Center CGPA Card */}
-            <Card className="border-none flex-1 p-8 bg-foreground text-white min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex flex-col items-center justify-center gap-3 h-full">
-                <div className="text-6xl lg:text-7xl font-bold text-center text-[#00ff9c]">
-                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
-                </div>
-                <span className="font-bold text-lg lg:text-xl text-center border-none">
-                  {cgpa.cgpa > 0
-                    ? `Based on ${cgpa.completedSemesters} completed semester${
-                        cgpa.completedSemesters !== 1 ? "s" : ""
-                      }`
-                    : "Complete semester details to calculate CGPA"}
-                </span>
-              </div>
-            </Card>
-
-            {/* Right Stats Card */}
-            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex flex-col items-center justify-center gap-4 h-full">
-                <span className="text-5xl lg:text-6xl text-white font-bold">
-                  {cgpa.totalCredits}
-                </span>
-                <span className="font-semibold text-white text-center text-lg lg:text-xl">
-                  Total Credits
-                </span>
-              </div>
-            </Card>
-          </div>
-        </div>
+        <p className="text-muted-foreground text-base sm:text-xl font-medium max-w-2xl mx-auto">
+          Enter your module details for each semester or import your saved
+          module to calculate your Grade Point Average
+        </p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -396,6 +238,93 @@ export function MultiSemesterTable() {
           );
         })}
       </Tabs>
+
+      {/* Stats Cards Section */}
+      <div className="space-y-4">
+        {/* Mobile Layout (< sm) - CGPA at top, then stats below */}
+        <div className="sm:hidden flex flex-col space-y-4">
+          {/* CGPA Card - Top on mobile */}
+          <Card className="p-6  bg-foreground text-white shadow-lg border-none">
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2 text-[#00ff9c]">
+                {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
+              </div>
+              <span className="text-lg font-semibold ">
+                {cgpa.cgpa > 0
+                  ? `Based on ${cgpa.completedSemesters} completed semester${
+                      cgpa.completedSemesters !== 1 ? "s" : ""
+                    }`
+                  : "Complete semester details to calculate CGPA"}
+              </span>
+            </div>
+          </Card>
+
+          {/* Stats Cards - Below CGPA on mobile */}
+          <div className="grid grid-cols-1 gap-4">
+            <Card className="p-6  bg-primary text-white shadow-lg border-none">
+              <div className="text-center">
+                <div className="text-5xl font-bold mb-2">
+                  {cgpa.completedSemesters}/8
+                </div>
+                <span className="text-lg font-semibold">
+                  Completed Semesters
+                </span>
+              </div>
+            </Card>
+            <Card className="p-6  bg-primary text-white shadow-lg border-none">
+              <div className="text-center">
+                <div className="text-5xl font-bold mb-2">
+                  {cgpa.totalCredits}
+                </div>
+                <span className="text-lg font-semibold">Total Credits</span>
+              </div>
+            </Card>
+          </div>
+        </div>
+
+        {/* Desktop Layout (>= sm) - Stats on sides, CGPA in middle */}
+        <div className="hidden sm:flex sm:items-stretch sm:justify-between sm:gap-6 w-full">
+          {/* Left Stats Card */}
+          <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+            <div className="flex flex-col items-center justify-center gap-4 h-full">
+              <span className="text-5xl lg:text-6xl text-white font-bold">
+                {cgpa.completedSemesters}/8
+              </span>
+              <span className="font-semibold text-white text-center text-lg lg:text-xl">
+                Completed Semesters
+              </span>
+            </div>
+          </Card>
+
+          {/* Center CGPA Card */}
+          <Card className="border-none flex-1 p-8 bg-foreground text-white min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+            <div className="flex flex-col items-center justify-center gap-3 h-full">
+              <div className="text-6xl lg:text-7xl font-bold text-center text-[#00ff9c]">
+                {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
+              </div>
+              <span className="font-bold text-lg lg:text-xl text-center border-none">
+                {cgpa.cgpa > 0
+                  ? `Based on ${cgpa.completedSemesters} completed semester${
+                      cgpa.completedSemesters !== 1 ? "s" : ""
+                    }`
+                  : "Complete semester details to calculate CGPA"}
+              </span>
+            </div>
+          </Card>
+
+          {/* Right Stats Card */}
+          <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+            <div className="flex flex-col items-center justify-center gap-4 h-full">
+              <span className="text-5xl lg:text-6xl text-white font-bold">
+                {cgpa.totalCredits}
+              </span>
+              <span className="font-semibold text-white text-center text-lg lg:text-xl">
+                Total Credits
+              </span>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

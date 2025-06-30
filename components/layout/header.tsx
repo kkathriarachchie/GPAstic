@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { Trash2, Import, Save } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -46,40 +46,60 @@ export function Header() {
           </span>
         </Link>
 
-        {/* CTA Button and Mobile Menu Toggle */}
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {/* CTA Button 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="destructive"
-                size="sm"
-                className="items-center gap-2 flex "
-              >
-                Reset All
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action will permanently delete all data from all 8
-                  semesters. This cannot be undone. Are you sure you want to
-                  continue?
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={resetAllSemesters}
-                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+        {/* Action Buttons and Mobile Menu Toggle */}
+        <div className="flex md:order-2 items-center space-x-2 md:space-x-3">
+          {/* Action Buttons - Hidden on mobile, shown on larger screens */}
+          <div className="hidden md:flex gap-2">
+            {/* Import Button */}
+            <Button
+              variant="default"
+              size="sm"
+              className="items-center gap-2 flex font-medium shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <Import className="h-4 w-4" />
+            </Button>
+
+            {/* Saved Button */}
+            <Button
+              variant="secondary"
+              size="sm"
+              className="items-center gap-2 flex font-medium shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <Save className="h-4 w-4" />
+            </Button>
+
+            {/* Reset Button */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="items-center gap-2 flex font-medium bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
                 >
-                  Reset All Data
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-          */}
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will permanently delete all data from all 8
+                    semesters. This cannot be undone. Are you sure you want to
+                    continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={resetAllSemesters}
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+                  >
+                    Reset All Data
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
 
           <button
             data-collapse-toggle="navbar-cta"
