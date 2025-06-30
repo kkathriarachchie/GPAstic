@@ -48,22 +48,68 @@ export function Header() {
 
         {/* Action Buttons and Mobile Menu Toggle */}
         <div className="flex md:order-2 items-center space-x-2 md:space-x-3">
-          {/* Action Buttons - Hidden on mobile, shown on larger screens */}
+          {/* Mobile Quick Action Buttons - Icon only */}
+          <div className="flex md:hidden gap-1">
+            {/* Import Button - Mobile Icon */}
+            <Button variant="ghost" size="sm" className="p-2 h-8 w-8">
+              <Import className="h-4 w-4" />
+            </Button>
+
+            {/* Saved Button - Mobile Icon */}
+            <Button variant="ghost" size="sm" className="p-2 h-8 w-8">
+              <Save className="h-4 w-4" />
+            </Button>
+
+            {/* Reset Button - Mobile Icon */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Reset All Semesters</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action will permanently delete all data from all 8
+                    semesters. This cannot be undone. Are you sure you want to
+                    continue?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={resetAllSemesters}
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+                  >
+                    Reset All Data
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+
+          {/* Action Buttons - Desktop layout */}
           <div className="hidden md:flex gap-2">
             {/* Import Button */}
+
             <Button
-              variant="default"
+              variant="ghost"
               size="sm"
-              className="items-center gap-2 flex font-medium shadow-md hover:shadow-lg transition-all duration-200"
+              className="items-center gap-2 flex font-medium hover:shadow-lg "
             >
               <Import className="h-4 w-4" />
             </Button>
 
             {/* Saved Button */}
             <Button
-              variant="secondary"
+              variant="ghost"
               size="sm"
-              className="items-center gap-2 flex font-medium shadow-md hover:shadow-lg transition-all duration-200"
+              className="items-center gap-2 flex font-medium  hover:shadow-lg "
             >
               <Save className="h-4 w-4" />
             </Button>
@@ -72,9 +118,9 @@ export function Header() {
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
-                  variant="destructive"
+                  variant="ghost"
                   size="sm"
-                  className="items-center gap-2 flex font-medium bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+                  className="items-center gap-2 flex font-medium  text-red-600 hover:text-red-700 hover:bg-red-50 hover:shadow-lg "
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -135,7 +181,7 @@ export function Header() {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#f0ebe8] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:mt-0 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:border-0 md:bg-[#f0ebe8] dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:border-t-0">
             <li>
               <Link
                 href="/"
