@@ -43,7 +43,7 @@ export default function GuidePage() {
 
         {/* Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <Card className="text-center border-3">
+          <Card className="text-center border-2 ">
             <CardHeader>
               <Users className="h-12 w-12 text-primary mx-auto mb-2" />
               <CardTitle className="text-lg sm:text-xl">For Students</CardTitle>
@@ -55,7 +55,7 @@ export default function GuidePage() {
             </CardContent>
           </Card>
 
-          <Card className="text-center  border-3">
+          <Card className="text-center  border-2">
             <CardHeader>
               <Target className="h-12 w-12 text-primary mx-auto mb-2" />
               <CardTitle className="text-lg sm:text-xl">
@@ -70,7 +70,7 @@ export default function GuidePage() {
             </CardContent>
           </Card>
 
-          <Card className="text-center  border-3">
+          <Card className="text-center  border-2">
             <CardHeader>
               <FileText className="h-12 w-12 text-primary mx-auto mb-2" />
               <CardTitle className="text-lg sm:text-xl">
@@ -100,10 +100,10 @@ export default function GuidePage() {
             {/* Steps */}
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Step 1 */}
-              <Card className="border-3">
+              <Card className="border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       1
                     </div>
                     <CardTitle className="text-xl sm:text-[22px] ">
@@ -113,7 +113,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Plus className="h-5 w-5 text-blue-500 mt-1" />
+                    <Plus className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">Add Modules</h4>
                       <p className="text-sm sm:text-base text-muted-foreground">
@@ -138,10 +138,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 2 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       2
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -151,7 +151,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Star className="h-5 w-5 text-yellow-500 mt-1" />
+                    <Star className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Choose Your Grades
@@ -175,6 +175,9 @@ export default function GuidePage() {
                       <span>B- = 2.7</span>
                       <span>C+ = 2.3</span>
                       <span>C = 2.0</span>
+                      <span>C- = 1.7</span>
+                      <span>D+ = 1.3</span>
+                      <span>D = 1.0</span>
                       <span>E- = 0.0</span>
                     </div>
                   </div>
@@ -182,10 +185,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 3 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       3
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -195,7 +198,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <BarChart3 className="h-5 w-5 text-green-500 mt-1" />
+                    <BarChart3 className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Monitor Your GPA
@@ -221,10 +224,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 4 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       4
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -234,7 +237,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Save className="h-5 w-5 text-purple-500 mt-1" />
+                    <Save className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Save Your Progress
@@ -278,10 +281,10 @@ export default function GuidePage() {
             {/* Steps */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Step 1 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       1
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -291,7 +294,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Import className="h-5 w-5 text-cyan-500 mt-1" />
+                    <Import className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Load Previous Data
@@ -319,10 +322,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 2 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       2
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -332,7 +335,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Plus className="h-5 w-5 text-orange-500 mt-1" />
+                    <Plus className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Update Your Records
@@ -358,10 +361,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 3 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       3
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -371,7 +374,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <BarChart3 className="h-5 w-5 text-green-500 mt-1" />
+                    <BarChart3 className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Track Real-time Changes
@@ -397,10 +400,10 @@ export default function GuidePage() {
               </Card>
 
               {/* Step 4 */}
-              <Card className=" border-3">
+              <Card className=" border-2">
                 <CardHeader>
                   <div className="flex items-center gap-3">
-                    <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
+                    <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold sm:text-lg">
                       4
                     </div>
                     <CardTitle className="text-xl sm:text-[22px]">
@@ -410,7 +413,7 @@ export default function GuidePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Save className="h-5 w-5 text-purple-500 mt-1" />
+                    <Save className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold sm:text-lg">
                         Save Your Updates
@@ -446,7 +449,7 @@ export default function GuidePage() {
           </div>
 
           <div className="space-y-4">
-            <Card className="border-3">
+            <Card className="border-none bg-[#f0ebe8] shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   What happens if I close the browser?
@@ -461,9 +464,9 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-3">
+            <Card className="border-none bg-[#f0ebe8] shadow-none">
               <CardHeader>
-                <CardTitle className="text-lg sm:text-xl">
+                <CardTitle className="text-lg sm:text-xl ">
                   Can I use this for multiple degree programs?
                 </CardTitle>
               </CardHeader>
@@ -476,7 +479,7 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-3">
+            <Card className="border-none bg-[#f0ebe8] shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   What if I make a mistake in my data?
@@ -491,7 +494,7 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-3">
+            <Card className="border-none bg-[#f0ebe8] shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   Is my data private and secure?
