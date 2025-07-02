@@ -173,158 +173,183 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* Title Section */}
-      <div className="text-center space-y-4">
-        <h2 className="text-5xl sm:text-7xl font-bold text-foreground">
-          GPA Calculator
-        </h2>
+      <Card className="bg-muted border-none p-8 ">
+        <div className="text-center space-y-4">
+          <h2 className="text-5xl sm:text-7xl font-bold text-primary ">
+            GPA Calculator
+          </h2>
+        </div>
+      </Card>
+      <Card className="p-6 bg-background  border-none shadow-none">
+        <div className="flex flex-col space-y-1 ">
+          <span className="text-primary  text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
+            Step 1
+          </span>
+          <p className="text-muted-foreground text-base  sm:text-xl font-semibold">
+            Enter your module details for each semester or import your saved
+            module to calculate your Grade Point Average
+          </p>
+        </div>
 
-        <p className="text-muted-foreground text-base sm:text-xl font-medium max-w-2xl mx-auto">
-          Enter your module details for each semester or import your saved
-          module to calculate your Grade Point Average
-        </p>
-      </div>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:rounded-full sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
+            {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
+              const semesterKey = `semester-${semesterNum}`;
+              const semesterData = getSemesterData(semesterKey);
+              const { sgpa } = calculateSemesterSGPA(semesterData);
+              //const hasData = sgpa > 0;
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full h-30  grid-cols-4 grid-rows-2 sm:rounded-full sm:grid-cols-8 sm:grid-rows-1 sm:h-full sm:p-1.5 p-1.5 gap-1 shadow-sm">
+              return (
+                <TabsTrigger
+                  key={semesterKey}
+                  value={semesterKey}
+                  className={`text-xs sm:text-sm relative
+                data-[state=active]:bg-primary
+                data-[state=active]:text-primary-foreground
+                data-[state=active]:shadow-sm
+                transition-colors duration-200
+                hover:bg-primary/15
+                sm:rounded-full
+                sm:h-full
+                sm:px-4
+                sm:py-2
+    
+                `}
+                >
+                  <div className="flex flex-col items-center ">
+                    <span className="!text-[15px] sm:!text-base font-bold ">
+                      Sem {semesterNum}
+                    </span>
+                    <span
+                      className={`text-[14px] !font-semibold   sm:text-base`}
+                    >
+                      {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
+                    </span>
+                  </div>
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+
           {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
             const semesterKey = `semester-${semesterNum}`;
-            const semesterData = getSemesterData(semesterKey);
-            const { sgpa } = calculateSemesterSGPA(semesterData);
-            //const hasData = sgpa > 0;
-
             return (
-              <TabsTrigger
+              <TabsContent
                 key={semesterKey}
                 value={semesterKey}
-                className={`text-xs sm:text-sm relative
-    data-[state=active]:bg-primary
-    data-[state=active]:text-primary-foreground
-    data-[state=active]:shadow-sm
-    transition-colors duration-200
-    hover:bg-primary/15
-    sm:rounded-full
-    sm:h-full
-    sm:px-4
-    sm:py-2
-    
-    `}
+                className="mt-2"
               >
-                <div className="flex flex-col items-center ">
-                  <span className="!text-[15px] sm:!text-base font-bold ">
-                    Sem {semesterNum}
-                  </span>
-                  <span className={`text-[14px] !font-semibold   sm:text-base`}>
-                    {sgpa > 0 ? sgpa.toFixed(2) : "0.00"}
-                  </span>
-                </div>
-              </TabsTrigger>
+                <SemesterTable
+                  semesterNumber={semesterNum}
+                  data={getSemesterData(semesterKey)}
+                  onDataChange={(data) =>
+                    handleSemesterDataChange(semesterKey, data)
+                  }
+                  onResetSemester={() => resetSemester(semesterKey)}
+                />
+              </TabsContent>
             );
           })}
-        </TabsList>
+        </Tabs>
+      </Card>
 
-        {Array.from({ length: 8 }, (_, i) => i + 1).map((semesterNum) => {
-          const semesterKey = `semester-${semesterNum}`;
-          return (
-            <TabsContent key={semesterKey} value={semesterKey} className="mt-2">
-              <SemesterTable
-                semesterNumber={semesterNum}
-                data={getSemesterData(semesterKey)}
-                onDataChange={(data) =>
-                  handleSemesterDataChange(semesterKey, data)
-                }
-                onResetSemester={() => resetSemester(semesterKey)}
-              />
-            </TabsContent>
-          );
-        })}
-      </Tabs>
+      <Card className="p-6 bg-background border-3 shadow-none border-none ">
+        <div className="flex flex-col space-y-1 ">
+          <span className="text-primary text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
+            Step 2
+          </span>
+          <p className="text-muted-foreground text-base sm:text-xl  font-semibold">
+            Calculate Cumulative Grade Point Average (CGPA)
+          </p>
+        </div>
 
-      {/* Stats Cards Section */}
-      <div className="space-y-4">
-        {/* Mobile Layout (< sm) - CGPA at top, then stats below */}
-        <div className="sm:hidden flex flex-col space-y-4">
-          {/* CGPA Card - Top on mobile */}
-          <Card className="p-6  bg-foreground text-white shadow-lg border-none">
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2 text-[#00ff9c]">
-                {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
-              </div>
-              <span className="text-lg font-semibold ">
-                {cgpa.cgpa > 0
-                  ? `Based on ${cgpa.completedSemesters} completed semester${
-                      cgpa.completedSemesters !== 1 ? "s" : ""
-                    }`
-                  : "Complete semester details to calculate CGPA"}
-              </span>
-            </div>
-          </Card>
-
-          {/* Stats Cards - Below CGPA on mobile */}
-          <div className="grid grid-cols-1 gap-4">
-            <Card className="p-6  bg-primary text-white shadow-lg border-none">
+        {/* Stats Cards Section */}
+        <div className="space-y-4">
+          {/* Mobile Layout (< sm) - CGPA at top, then stats below */}
+          <div className="sm:hidden flex flex-col space-y-4">
+            {/* CGPA Card - Top on mobile */}
+            <Card className="p-6  bg-foreground text-white shadow-lg border-none">
               <div className="text-center">
-                <div className="text-5xl font-bold mb-2">
-                  {cgpa.completedSemesters}/8
+                <div className="text-5xl font-bold mb-2 text-[#00ff9c]">
+                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
                 </div>
-                <span className="text-lg font-semibold">
+                <span className="text-lg font-semibold ">
+                  {cgpa.cgpa > 0
+                    ? `Based on ${cgpa.completedSemesters} completed semester${
+                        cgpa.completedSemesters !== 1 ? "s" : ""
+                      }`
+                    : "Complete semester details to calculate CGPA"}
+                </span>
+              </div>
+            </Card>
+
+            {/* Stats Cards - Below CGPA on mobile */}
+            <div className="grid grid-cols-1 gap-4">
+              <Card className="p-6  bg-primary text-white shadow-lg border-none">
+                <div className="text-center">
+                  <div className="text-5xl font-bold mb-2">
+                    {cgpa.completedSemesters}/8
+                  </div>
+                  <span className="text-lg font-semibold">
+                    Completed Semesters
+                  </span>
+                </div>
+              </Card>
+              <Card className="p-6  bg-primary text-white shadow-lg border-none">
+                <div className="text-center">
+                  <div className="text-5xl font-bold mb-2">
+                    {cgpa.totalCredits}
+                  </div>
+                  <span className="text-lg font-semibold">Total Credits</span>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* Desktop Layout (>= sm) - Stats on sides, CGPA in middle */}
+          <div className="hidden sm:flex sm:items-stretch sm:justify-between sm:gap-6 w-full">
+            {/* Left Stats Card */}
+            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-4 h-full">
+                <span className="text-5xl lg:text-6xl text-white font-bold">
+                  {cgpa.completedSemesters}/8
+                </span>
+                <span className="font-semibold text-white text-center text-lg lg:text-xl">
                   Completed Semesters
                 </span>
               </div>
             </Card>
-            <Card className="p-6  bg-primary text-white shadow-lg border-none">
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-2">
-                  {cgpa.totalCredits}
+
+            {/* Center CGPA Card */}
+            <Card className="border-none flex-1 p-8 bg-foreground text-white min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-3 h-full">
+                <div className="text-6xl lg:text-7xl font-bold text-center text-[#00ff9c]">
+                  {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
                 </div>
-                <span className="text-lg font-semibold">Total Credits</span>
+                <span className="font-bold text-lg lg:text-xl text-center border-none">
+                  {cgpa.cgpa > 0
+                    ? `Based on ${cgpa.completedSemesters} completed semester${
+                        cgpa.completedSemesters !== 1 ? "s" : ""
+                      }`
+                    : "Complete semester details to calculate CGPA"}
+                </span>
+              </div>
+            </Card>
+
+            {/* Right Stats Card */}
+            <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center justify-center gap-4 h-full">
+                <span className="text-5xl lg:text-6xl text-white font-bold">
+                  {cgpa.totalCredits}
+                </span>
+                <span className="font-semibold text-white text-center text-lg lg:text-xl">
+                  Total Credits
+                </span>
               </div>
             </Card>
           </div>
         </div>
-
-        {/* Desktop Layout (>= sm) - Stats on sides, CGPA in middle */}
-        <div className="hidden sm:flex sm:items-stretch sm:justify-between sm:gap-6 w-full">
-          {/* Left Stats Card */}
-          <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="flex flex-col items-center justify-center gap-4 h-full">
-              <span className="text-5xl lg:text-6xl text-white font-bold">
-                {cgpa.completedSemesters}/8
-              </span>
-              <span className="font-semibold text-white text-center text-lg lg:text-xl">
-                Completed Semesters
-              </span>
-            </div>
-          </Card>
-
-          {/* Center CGPA Card */}
-          <Card className="border-none flex-1 p-8 bg-foreground text-white min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="flex flex-col items-center justify-center gap-3 h-full">
-              <div className="text-6xl lg:text-7xl font-bold text-center text-[#00ff9c]">
-                {cgpa.cgpa > 0 ? cgpa.cgpa.toFixed(2) : "0.00"}
-              </div>
-              <span className="font-bold text-lg lg:text-xl text-center border-none">
-                {cgpa.cgpa > 0
-                  ? `Based on ${cgpa.completedSemesters} completed semester${
-                      cgpa.completedSemesters !== 1 ? "s" : ""
-                    }`
-                  : "Complete semester details to calculate CGPA"}
-              </span>
-            </div>
-          </Card>
-
-          {/* Right Stats Card */}
-          <Card className="border-none flex-1 p-8 bg-primary text-primary-foreground min-w-0 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="flex flex-col items-center justify-center gap-4 h-full">
-              <span className="text-5xl lg:text-6xl text-white font-bold">
-                {cgpa.totalCredits}
-              </span>
-              <span className="font-semibold text-white text-center text-lg lg:text-xl">
-                Total Credits
-              </span>
-            </div>
-          </Card>
-        </div>
-      </div>
+      </Card>
     </div>
   );
 }

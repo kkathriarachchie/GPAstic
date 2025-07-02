@@ -99,22 +99,24 @@ export function DataTable<TData, TValue>({
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="border-none">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>
+                  <AlertDialogTitle className="sm:text-xl">
                     Reset Semester {semesterNumber}
                   </AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogDescription className="sm:text-base">
                     This action will permanently delete all data from Semester{" "}
                     {semesterNumber}. This cannot be undone. Are you sure you
                     want to continue?
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6">Cancel</AlertDialogCancel>
+                  <AlertDialogCancel className="py-6 sm:text-base border-none">
+                    Cancel
+                  </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={onResetSemester}
-                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6"
+                    className="bg-destructive hover:bg-destructive/90 text-destructive-foreground py-6 sm:text-base"
                   >
                     Reset Semester
                   </AlertDialogAction>

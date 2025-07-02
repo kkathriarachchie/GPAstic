@@ -459,7 +459,7 @@ This is exsisting
   --muted-foreground: oklch(0.4444 0.0096 73.639);
   --accent: oklch(0.9245 0.0138 92.9892);
   --accent-foreground: oklch(0.3353 0.0132 2.7676);
-  --destructive: oklch(0.583 0.2387 28.4765);
+  --destructive: oklch(0.629 0.1902 23.0704);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.7799 0.1206 45.761);
   --input: oklch(0.7799 0.1206 45.761);
@@ -606,6 +606,7 @@ This is exsisting
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
 }
+
 body {
   letter-spacing: var(--tracking-normal);
 }
