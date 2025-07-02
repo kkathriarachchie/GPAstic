@@ -314,14 +314,7 @@ export function Header() {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                href="/about"
-                className="font-semibold block py-2 px-3 md:p-0 text-foreground rounded-sm hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary "
-              >
-                About
-              </Link>
-            </li>
+
             <li>
               <Link
                 href="/guide"
@@ -332,18 +325,10 @@ export function Header() {
             </li>
             <li>
               <Link
-                href="/help"
+                href="/about"
                 className="font-semibold block py-2 px-3 md:p-0 text-foreground rounded-sm hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary "
               >
-                Help
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="font-semibold block py-2 px-3 md:p-0 text-foreground rounded-sm hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary"
-              >
-                Contact
+                About
               </Link>
             </li>
           </ul>

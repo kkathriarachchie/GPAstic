@@ -4,7 +4,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#f0ebe8] border-t border-gray-200 mt-auto">
+    <footer className="bg-[#f0ebe8] border-t border-none mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           {/* Logo and Brand */}
@@ -16,11 +16,11 @@ export function Footer() {
           </div>
 
           {/* Navigation Links */}
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
+          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium  text-muted-foreground sm:mb-0">
             <li>
               <Link
                 href="/about"
-                className="hover:underline hover:text-blue-600 me-4 md:me-6 transition-colors"
+                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
               >
                 About
               </Link>
@@ -28,7 +28,7 @@ export function Footer() {
             <li>
               <Link
                 href="/privacy"
-                className="hover:underline hover:text-blue-600 me-4 md:me-6 transition-colors"
+                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
               >
                 Privacy Policy
               </Link>
@@ -36,7 +36,7 @@ export function Footer() {
             <li>
               <Link
                 href="/help"
-                className="hover:underline hover:text-blue-600 me-4 md:me-6 transition-colors"
+                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
               >
                 Help
               </Link>
@@ -44,7 +44,7 @@ export function Footer() {
             <li>
               <Link
                 href="/contact"
-                className="hover:underline hover:text-blue-600 transition-colors"
+                className="hover:underline hover:text-primary transition-colors"
               >
                 Contact
               </Link>
@@ -52,15 +52,21 @@ export function Footer() {
           </ul>
         </div>
 
-        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+        <hr className="my-6 border sm:mx-auto lg:my-8" />
 
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center">
-            © {currentYear} GPA Calculator. All Rights Reserved.
+          <span className="text-sm text-muted-foreground sm:text-center">
+            © {currentYear} GPAstic. All Rights Reserved.
           </span>
           <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-            <p className="text-sm text-gray-500">
-              Built with Next.js & Tailwind CSS
+            <p className="text-sm  text-muted-foreground">
+              Built by{" "}
+              <a
+                href="https://github.com/kkathriarachchie"
+                className="hover:underline"
+              >
+                Kavishka Kathriarachchie
+              </a>
             </p>
           </div>
         </div>

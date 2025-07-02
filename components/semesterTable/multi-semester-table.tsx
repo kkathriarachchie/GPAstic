@@ -173,21 +173,46 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* Title Section */}
-      <Card className="bg-muted border-none p-8 ">
-        <div className="text-center space-y-4">
-          <h2 className="text-5xl sm:text-7xl font-bold text-primary ">
-            GPA Calculator
-          </h2>
+      <Card className="bg-background border-none p-4 shadow-none">
+        <div className="text-center space-y-6">
+          {/* Main Title */}
+          <div className="space-y-4">
+            <h1 className="text-5xl sm:text-7xl font-bold text-primary">
+              GPA Calculator
+            </h1>
+          </div>
+
+          {/* Welcome Message */}
+          <div className="space-y-4 max-w-4xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+              Welcome to Your Academic Journey! 🎓
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+              Track your academic progress across all 8 semesters with our
+              comprehensive GPA calculator. Enter your module details, grades,
+              and credits to calculate your SGPA and CGPA automatically.
+            </p>
+          </div>
+
+          {/* Additional Features */}
+          <div className="bg-primary/5 rounded-lg p-4 max-w-3xl mx-auto border-none border-primary/10">
+            <p className="text-sm sm:text-base text-foreground">
+              💡 <strong>Pro Tip:</strong> Use the import/export buttons in the
+              header to backup your data or share it across devices. Your
+              progress is automatically saved in your browser.
+            </p>
+          </div>
         </div>
       </Card>
-      <Card className="p-6 bg-background  border-none shadow-none">
+      <Card className="p-4 bg-background  border-none shadow-none">
         <div className="flex flex-col space-y-1 ">
-          <span className="text-primary  text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
+          <span className="text-foreground  text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
             Step 1
           </span>
-          <p className="text-muted-foreground text-base  sm:text-xl font-semibold">
-            Enter your module details for each semester or import your saved
-            module to calculate your Grade Point Average
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            Add your module names, codes, and credit hours for each semester.
+            Then choose your grades from A+ to E- and watch your GPA calculate
+            automatically
           </p>
         </div>
 
@@ -253,13 +278,13 @@ export function MultiSemesterTable() {
         </Tabs>
       </Card>
 
-      <Card className="p-6 bg-background border-3 shadow-none border-none ">
+      <Card className="p-5 bg-background border-3 shadow-none border-none ">
         <div className="flex flex-col space-y-1 ">
-          <span className="text-primary text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
+          <span className="text-foreground text-2xl font-extrabold sm:text-3xl sm:font-extrabold">
             Step 2
           </span>
-          <p className="text-muted-foreground text-base sm:text-xl  font-semibold">
-            Calculate Cumulative Grade Point Average (CGPA)
+          <p className="text-muted-foreground text-base sm:text-lg  leading-relaxed">
+            Monitor your overall CGPA across all semesters
           </p>
         </div>
 
