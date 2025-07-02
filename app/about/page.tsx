@@ -12,7 +12,6 @@ import {
   Mail,
   Github,
   Linkedin,
-
 } from "lucide-react";
 import Link from "next/link";
 
@@ -540,30 +539,44 @@ export default function AboutPage() {
                     </p>
 
                     <div className="flex flex-wrap gap-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-2  sm:text-base border-2"
+                      <Link href="mailto:kkathriarachchie@gmail.com">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="gap-2  sm:text-base border-2"
+                        >
+                          <Mail className="h-4 w-4" />
+                          Email
+                        </Button>
+                      </Link>
+                      <Link
+                        href="https://github.com/kkathriarachchie"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <Mail className="h-4 w-4" />
-                        Email
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-2 sm:text-base border-2"
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="gap-2 sm:text-base border-2"
+                        >
+                          <Github className="h-4 w-4" />
+                          GitHub
+                        </Button>
+                      </Link>
+                      <Link
+                        href="https://linkedin.com/in/kavishka-kathriarachchi"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <Github className="h-4 w-4" />
-                        GitHub
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-2 sm:text-base border-2"
-                      >
-                        <Linkedin className="h-4 w-4" />
-                        LinkedIn
-                      </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="gap-2 sm:text-base border-2"
+                        >
+                          <Linkedin className="h-4 w-4" />
+                          LinkedIn
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

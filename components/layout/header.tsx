@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Trash2, Import, Save } from "lucide-react";
 import {
@@ -29,8 +30,15 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [exportFilename, setExportFilename] = useState("");
   const [showImportDialog, setShowImportDialog] = useState(false);
-  const [pendingImportData, setPendingImportData] = useState<AllSemesterData | null>(null);
+  const [pendingImportData, setPendingImportData] =
+    useState<AllSemesterData | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
+
+  // Close mobile menu on route change (auto-hide)
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -68,8 +76,8 @@ export function Header() {
       const csvContent = exportToCSV(parsedData);
 
       // Ensure filename ends with .csv
-      const filename = exportFilename.endsWith('.csv') 
-        ? exportFilename 
+      const filename = exportFilename.endsWith(".csv")
+        ? exportFilename
         : `${exportFilename}.csv`;
 
       downloadCSV(csvContent, filename);
@@ -144,6 +152,11 @@ export function Header() {
     setPendingImportData(null);
   };
 
+  // Hide mobile menu after clicking a nav link
+  const handleNavClick = () => {
+    if (window.innerWidth < 768) setIsMenuOpen(false);
+  };
+
   return (
     <nav className="bg-[#f0ebe8] border-gray-200 ">
       {/* Hidden file input for CSV import */}
@@ -164,8 +177,8 @@ export function Header() {
           <Image
             src="/GPAstic.ico"
             alt="GPAstic Logo"
-            width={120} // can be 100, 150, etc. just keep ratio
-            height={100} // 190 / 1.896 ≈ 100
+            width={120}
+            height={100}
             className="object-contain"
             priority
           />
@@ -270,7 +283,6 @@ export function Header() {
           {/* Action Buttons - Desktop layout */}
           <div className="hidden md:flex gap-2 ">
             {/* Import Button */}
-
             <Button
               variant="ghost"
               size="sm"
@@ -406,8 +418,13 @@ export function Header() {
             <li>
               <Link
                 href="/"
-                className="font-semibold block py-2 px-3 md:p-0 text-white bg-primary rounded-sm md:bg-transparent md:text-primary md:dark:primary"
-                aria-current="page"
+                className={`font-semibold block py-2 px-3 md:p-0 rounded-sm ${
+                  pathname === "/"
+                    ? "text-white bg-primary md:bg-transparent md:text-primary"
+                    : "text-foreground hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary"
+                }`}
+                aria-current={pathname === "/" ? "page" : undefined}
+                onClick={handleNavClick}
               >
                 Home
               </Link>
@@ -416,7 +433,13 @@ export function Header() {
             <li>
               <Link
                 href="/guide"
-                className="font-semibold block py-2 px-3 md:p-0 text-foreground rounded-sm hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary "
+                className={`font-semibold block py-2 px-3 md:p-0 rounded-sm ${
+                  pathname === "/guide"
+                    ? "text-white bg-primary md:bg-transparent md:text-primary"
+                    : "text-foreground hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary"
+                }`}
+                aria-current={pathname === "/guide" ? "page" : undefined}
+                onClick={handleNavClick}
               >
                 Guide
               </Link>
@@ -424,7 +447,13 @@ export function Header() {
             <li>
               <Link
                 href="/about"
-                className="font-semibold block py-2 px-3 md:p-0 text-foreground rounded-sm hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary "
+                className={`font-semibold block py-2 px-3 md:p-0 rounded-sm ${
+                  pathname === "/about"
+                    ? "text-white bg-primary md:bg-transparent md:text-primary"
+                    : "text-foreground hover:bg-[#f0ebe8] md:hover:bg-transparent md:hover:text-primary"
+                }`}
+                aria-current={pathname === "/about" ? "page" : undefined}
+                onClick={handleNavClick}
               >
                 About
               </Link>
@@ -441,11 +470,12 @@ export function Header() {
               Replace Existing Data
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base">
-              This will replace your current GPA data. Are you sure you want to continue?
+              This will replace your current GPA data. Are you sure you want to
+              continue?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel 
+            <AlertDialogCancel
               onClick={handleImportCancel}
               className="py-6 text-base border-2"
             >
