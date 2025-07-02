@@ -188,7 +188,7 @@ export function Header() {
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6 sm:text-base border-none">
+                  <AlertDialogCancel className="py-6 sm:text-base border-2">
                     Cancel
                   </AlertDialogCancel>
                   <AlertDialogAction
@@ -256,7 +256,7 @@ export function Header() {
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6 text-base border-none">
+                  <AlertDialogCancel className="py-6 text-base border-2">
                     Cancel
                   </AlertDialogCancel>
                   <AlertDialogAction

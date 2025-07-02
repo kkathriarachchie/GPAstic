@@ -173,7 +173,7 @@ export function MultiSemesterTable() {
   return (
     <div className="w-full space-y-6">
       {/* Title Section */}
-      <Card className="bg-background border-none p-4 shadow-none">
+      <Card className="bg-[#f0ebe8] border-none p-5 shadow-none">
         <div className="text-center space-y-6">
           {/* Main Title */}
           <div className="space-y-4">

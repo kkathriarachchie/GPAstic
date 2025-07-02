@@ -111,7 +111,7 @@ export function DataTable<TData, TValue>({
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="py-6 sm:text-base border-none">
+                  <AlertDialogCancel className="py-6 sm:text-base border-2">
                     Cancel
                   </AlertDialogCancel>
                   <AlertDialogAction
