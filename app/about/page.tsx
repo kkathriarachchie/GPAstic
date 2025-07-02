@@ -12,7 +12,7 @@ import {
   Mail,
   Github,
   Linkedin,
-  Heart,
+
 } from "lucide-react";
 import Link from "next/link";
 

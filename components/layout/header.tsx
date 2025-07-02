@@ -27,6 +27,7 @@ import { Input } from "../ui/input";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [exportFilename, setExportFilename] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const toggleMenu = () => {
@@ -40,22 +41,34 @@ export function Header() {
     window.location.reload();
   };
 
-  // Export data to CSV
+  // Show export dialog
   const handleExportData = () => {
+    const data = localStorage.getItem("gpa-calculator-data");
+    if (!data) {
+      alert("No data found to export. Please add some semester data first.");
+      return;
+    }
+
+    // Generate default filename with current date
+    const now = new Date();
+    const dateStr = now.toISOString().split("T")[0]; // YYYY-MM-DD format
+    const defaultFilename = `gpa-calculator-data-${dateStr}`;
+    setExportFilename(defaultFilename);
+  };
+
+  // Perform actual export with custom filename
+  const performExport = () => {
     try {
       const data = localStorage.getItem("gpa-calculator-data");
-      if (!data) {
-        alert("No data found to export. Please add some semester data first.");
-        return;
-      }
+      if (!data) return;
 
       const parsedData: AllSemesterData = JSON.parse(data);
       const csvContent = exportToCSV(parsedData);
 
-      // Generate filename with current date
-      const now = new Date();
-      const dateStr = now.toISOString().split("T")[0]; // YYYY-MM-DD format
-      const filename = `gpa-calculator-data-${dateStr}.csv`;
+      // Ensure filename ends with .csv
+      const filename = exportFilename.endsWith('.csv') 
+        ? exportFilename 
+        : `${exportFilename}.csv`;
 
       downloadCSV(csvContent, filename);
     } catch (error) {
@@ -157,16 +170,49 @@ export function Header() {
               <Import className="h-4 w-4 text-foreground " />
             </Button>
 
-            {/* Saved Button - Mobile Icon */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="p-2 h-8 w-8 hover:shadow-lg"
-              onClick={handleExportData}
-              title="Export CSV"
-            >
-              <Save className="h-4 w-4 text-foreground" />
-            </Button>
+            {/* Export Button - Mobile Icon */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-8 w-8 hover:shadow-lg"
+                  onClick={handleExportData}
+                  title="Export CSV"
+                >
+                  <Save className="h-4 w-4 text-foreground" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="border-none">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="sm:text-xl">
+                    Export GPA Data
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="sm:text-base">
+                    Enter a filename for your CSV export:
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <div className="py-4">
+                  <Input
+                    value={exportFilename}
+                    onChange={(e) => setExportFilename(e.target.value)}
+                    placeholder="Enter filename (without .csv)"
+                    className="w-full"
+                  />
+                </div>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6 sm:text-base border-2">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={performExport}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground py-6 sm:text-base"
+                  >
+                    Export CSV
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
 
             {/* Reset Button - Mobile Icon */}
             <AlertDialog>
@@ -222,19 +268,52 @@ export function Header() {
               </span>
             </Button>
 
-            {/* Saved Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="items-center gap-2 flex font-medium hover:shadow-lg "
-              onClick={handleExportData}
-              title="Export CSV"
-            >
-              <Save className="h-4 w-4" />
-              <span className="text-foreground font-semibold text-base">
-                Export
-              </span>
-            </Button>
+            {/* Export Button - Desktop */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="items-center gap-2 flex font-medium hover:shadow-lg "
+                  onClick={handleExportData}
+                  title="Export CSV"
+                >
+                  <Save className="h-4 w-4" />
+                  <span className="text-foreground font-semibold text-base">
+                    Export
+                  </span>
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="border-none">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-xl">
+                    Export GPA Data
+                  </AlertDialogTitle>
+                  <AlertDialogDescription className="text-base">
+                    Enter a filename for your CSV export:
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <div className="py-4">
+                  <Input
+                    value={exportFilename}
+                    onChange={(e) => setExportFilename(e.target.value)}
+                    placeholder="Enter filename (without .csv)"
+                    className="w-full"
+                  />
+                </div>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="py-6 text-base border-2">
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={performExport}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-base"
+                  >
+                    Export CSV
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
 
             {/* Reset Button */}
             <AlertDialog>
