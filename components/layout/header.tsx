@@ -28,6 +28,8 @@ import { Input } from "../ui/input";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [exportFilename, setExportFilename] = useState("");
+  const [showImportDialog, setShowImportDialog] = useState(false);
+  const [pendingImportData, setPendingImportData] = useState<AllSemesterData | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const toggleMenu = () => {
@@ -92,6 +94,7 @@ export function Header() {
     // Check file type
     if (!file.name.endsWith(".csv")) {
       alert("Please select a CSV file.");
+      event.target.value = "";
       return;
     }
 
@@ -99,24 +102,16 @@ export function Header() {
       const content = await readFileAsText(file);
       const importedData = importFromCSV(content);
 
-      // Confirm before overwriting existing data
+      // Check if existing data exists
       const existingData = localStorage.getItem("gpa-calculator-data");
       if (existingData) {
-        const confirmed = confirm(
-          "This will replace your current GPA data. Are you sure you want to continue?"
-        );
-        if (!confirmed) {
-          // Reset file input
-          event.target.value = "";
-          return;
-        }
+        // Store the imported data and show confirmation dialog
+        setPendingImportData(importedData);
+        setShowImportDialog(true);
+      } else {
+        // No existing data, proceed directly
+        performImport(importedData);
       }
-
-      // Save imported data to localStorage
-      localStorage.setItem("gpa-calculator-data", JSON.stringify(importedData));
-
-      // Reload page to reflect changes
-      window.location.reload();
     } catch (error) {
       console.error("Error importing data:", error);
       alert(
@@ -126,6 +121,27 @@ export function Header() {
 
     // Reset file input
     event.target.value = "";
+  };
+
+  // Perform the actual import
+  const performImport = (importData: AllSemesterData) => {
+    localStorage.setItem("gpa-calculator-data", JSON.stringify(importData));
+    window.location.reload();
+  };
+
+  // Handle import confirmation
+  const handleImportConfirm = () => {
+    if (pendingImportData) {
+      performImport(pendingImportData);
+    }
+    setShowImportDialog(false);
+    setPendingImportData(null);
+  };
+
+  // Handle import cancellation
+  const handleImportCancel = () => {
+    setShowImportDialog(false);
+    setPendingImportData(null);
   };
 
   return (
@@ -416,6 +432,34 @@ export function Header() {
           </ul>
         </div>
       </div>
+
+      {/* Import Confirmation Dialog */}
+      <AlertDialog open={showImportDialog} onOpenChange={setShowImportDialog}>
+        <AlertDialogContent className="border-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-xl">
+              Replace Existing Data
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              This will replace your current GPA data. Are you sure you want to continue?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel 
+              onClick={handleImportCancel}
+              className="py-6 text-base border-2"
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleImportConfirm}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-base"
+            >
+              Replace Data
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </nav>
   );
 }
