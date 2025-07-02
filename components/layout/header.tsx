@@ -135,14 +135,11 @@ export function Header() {
           <Image
             src="/GPAstic.ico"
             alt="GPAstic Logo"
-            width={32}
-            height={32}
-            className="h-8 w-8"
+            width={120} // can be 100, 150, etc. just keep ratio
+            height={100} // 190 / 1.896 ≈ 100
+            className="object-contain"
             priority
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap text-foreground ">
-            GPAstic
-          </span>
         </Link>
 
         {/* Action Buttons and Mobile Menu Toggle */}

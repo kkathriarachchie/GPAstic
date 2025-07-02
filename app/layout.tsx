@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   title: "GPA Calculator",
   description:
     "Calculate your Grade Point Average easily with our comprehensive GPA calculator tool",
+  icons: {
+    icon: "/GPAstic.ico",
+    shortcut: "/GPAstic.ico",
+    apple: "/GPAstic.ico",
+  },
 };
 
 export default function RootLayout({

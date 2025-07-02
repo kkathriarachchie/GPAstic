@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,10 +10,14 @@ export function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center mb-4 sm:mb-0 space-x-3">
-            <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">GPA</span>
-            </div>
-            <span className="text-xl font-semibold text-primary">GPAstic</span>
+            <Image
+              src="/GPAstic.ico"
+              alt="GPAstic Logo"
+              width={120} // can be 100, 150, etc. just keep ratio
+              height={100} // 190 / 1.896 ≈ 100
+              className=""
+              priority
+            />
           </div>
 
           {/* Navigation Links */}
