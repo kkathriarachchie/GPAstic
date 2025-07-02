@@ -14,6 +14,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
@@ -22,13 +23,16 @@ export default function AboutPage() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
-            <div className="bg-primary/10 rounded-full p-6">
-              <Calculator className="h-16 w-16 text-primary" />
+            <div className="">
+              <Image
+                src="/GPAstic.png"
+                alt="GPAstic Logo"
+                width={300}
+                height={300}
+              />
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
-            About GPAstic
-          </h1>
+
           <p className="text-xl text-muted-foreground mb-6 max-w-3xl mx-auto">
             A comprehensive Grade Point Average calculator designed to simplify
             academic progress tracking with precision and ease
@@ -146,7 +150,7 @@ export default function AboutPage() {
                     <Award className="h-6 w-6" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl s,:text-[22px]">
+                    <CardTitle className="text-xl sm:text-[22px]">
                       Cumulative Grade Point Average (CGPA)
                     </CardTitle>
                     <p className="text-sm sm:text-base text-muted-foreground">
@@ -158,9 +162,9 @@ export default function AboutPage() {
               <CardContent className="space-y-4">
                 <p className="text-sm sm:text-base text-muted-foreground">
                   The Cumulative Grade Point Average (CGPA) describes a
-                  student&apos;s current standing in terms of grade points
-                  earned for all GPA modules registered up to a given point of
-                  time, weighted according to number of credits.
+                  student's current standing in terms of grade points earned for
+                  all GPA modules registered up to a given point of time,
+                  weighted according to number of credits.
                 </p>
 
                 <div className="bg-muted p-4 rounded-lg">
