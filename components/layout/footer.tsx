@@ -19,34 +19,18 @@ export function Footer() {
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium  text-muted-foreground sm:mb-0">
             <li>
               <Link
+                href="/guide"
+                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
+              >
+                Guide
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/about"
                 className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
               >
                 About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/privacy"
-                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/help"
-                className="hover:underline hover:text-primary me-4 md:me-6 transition-colors"
-              >
-                Help
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="hover:underline hover:text-primary transition-colors"
-              >
-                Contact
               </Link>
             </li>
           </ul>

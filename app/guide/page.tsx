@@ -5,11 +5,7 @@ import {
   Plus,
   Star,
   BarChart3,
-  Download,
-  Upload,
   FileText,
-  CheckCircle,
-  ArrowRight,
   Calculator,
   Users,
   Target,
@@ -449,7 +445,7 @@ export default function GuidePage() {
           </div>
 
           <div className="space-y-4">
-            <Card className="border-none bg-[#f0ebe8] shadow-none">
+            <Card className="border-none bg-primary/5 shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   What happens if I close the browser?
@@ -464,7 +460,7 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-none bg-[#f0ebe8] shadow-none">
+            <Card className="border-none  bg-primary/5 shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl ">
                   Can I use this for multiple degree programs?
@@ -479,7 +475,7 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-none bg-[#f0ebe8] shadow-none">
+            <Card className="border-none  bg-primary/5 shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   What if I make a mistake in my data?
@@ -494,7 +490,7 @@ export default function GuidePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-none bg-[#f0ebe8] shadow-none">
+            <Card className="border-none  bg-primary/5 shadow-none">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">
                   Is my data private and secure?

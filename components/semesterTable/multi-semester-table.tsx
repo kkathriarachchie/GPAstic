@@ -195,7 +195,7 @@ export function MultiSemesterTable() {
           </div>
 
           {/* Additional Features */}
-          <div className=" rounded-lg p-4 max-w-3xl mx-auto border-none border-primary/10">
+          <div className="  bg-primary/5 rounded-lg p-4 max-w-3xl mx-auto border-none border-primary/10">
             <p className="text-sm sm:text-base text-foreground">
               💡 <strong>Pro Tip: </strong> Use the import/export buttons in the
               header to backup your data or share it across devices. Your

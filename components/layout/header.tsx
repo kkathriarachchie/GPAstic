@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash2, Import, Save } from "lucide-react";
@@ -131,9 +132,14 @@ export function Header() {
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-xs">GPA</span>
-          </div>
+          <Image
+            src="/GPAstic.ico"
+            alt="GPAstic Logo"
+            width={32}
+            height={32}
+            className="h-8 w-8"
+            priority
+          />
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-foreground ">
             GPAstic
           </span>
@@ -203,7 +209,7 @@ export function Header() {
           </div>
 
           {/* Action Buttons - Desktop layout */}
-          <div className="hidden md:flex gap-2">
+          <div className="hidden md:flex gap-2 ">
             {/* Import Button */}
 
             <Button
@@ -304,7 +310,7 @@ export function Header() {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:mt-0 border-none rounded-lg bg-[#fffcfa] md:space-x-8 rtl:space-x-reverse md:flex-row md:border-0 md:bg-[#f0ebe8] md:border-t-0">
+          <ul className="lg:ml-25 flex flex-col font-medium p-4 md:p-0 mt-4 md:mt-0 border-none rounded-lg bg-[#fffcfa] md:space-x-8 rtl:space-x-reverse md:flex-row md:border-0 md:bg-[#f0ebe8] md:border-t-0">
             <li>
               <Link
                 href="/"
