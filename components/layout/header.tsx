@@ -25,6 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Input } from "../ui/input";
+import GPAsticLogo from "@/public/GPAstic.ico";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -175,7 +176,7 @@ export function Header() {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <Image
-            src="/GPAstic.ico"
+            src={GPAsticLogo}
             alt="GPAstic Logo"
             width={120}
             height={100}
