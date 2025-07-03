@@ -291,7 +291,7 @@ export function Header() {
               title="Import CSV"
             >
               <Import className="h-4 w-4" />
-              <span className="text-foreground font-semibold text-base">
+              <span className="text-foreground font-semibold text-base ">
                 Import
               </span>
             </Button>
@@ -307,7 +307,7 @@ export function Header() {
                   title="Export CSV"
                 >
                   <Save className="h-4 w-4" />
-                  <span className="text-foreground font-semibold text-base">
+                  <span className="text-foreground font-semibold text-base  ">
                     Export
                   </span>
                 </Button>
@@ -414,7 +414,7 @@ export function Header() {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-cta"
         >
-          <ul className="lg:ml-25 flex flex-col font-medium p-4 md:p-0 mt-4 md:mt-0 border-none rounded-lg bg-[#fffcfa] md:space-x-8 rtl:space-x-reverse md:flex-row md:border-0 md:bg-[#f0ebe8] md:border-t-0">
+          <ul className="sm:text-lg lg:ml-25 flex flex-col font-medium p-4 md:p-0 mt-4 md:mt-0 border-none rounded-lg bg-[#fffcfa] md:space-x-8 rtl:space-x-reverse md:flex-row md:border-0 md:bg-[#f0ebe8] md:border-t-0">
             <li>
               <Link
                 href="/"
