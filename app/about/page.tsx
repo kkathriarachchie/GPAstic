@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import GPAsticLogo from "@/public/GPAstic.ico";
 
 export default function AboutPage() {
   return (
@@ -25,7 +26,7 @@ export default function AboutPage() {
           <div className="flex justify-center mb-6">
             <div className="">
               <Image
-                src="/GPAstic.png"
+                src={GPAsticLogo}
                 alt="GPAstic Logo"
                 width={300}
                 height={300}

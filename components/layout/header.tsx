@@ -180,6 +180,7 @@ export function Header() {
             alt="GPAstic Logo"
             width={120}
             height={100}
+            priority
           />
         </Link>
 

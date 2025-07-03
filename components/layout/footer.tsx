@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import GPAsticLogo from "@/public/GPAstic.ico";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ export function Footer() {
           {/* Logo and Brand */}
           <div className="flex items-center mb-4 sm:mb-0 space-x-3">
             <Image
-              src="/GPAstic.ico"
+              src={GPAsticLogo}
               alt="GPAstic Logo"
               width={120} // can be 100, 150, etc. just keep ratio
               height={100} // 190 / 1.896 ≈ 100
