@@ -25,7 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Input } from "../ui/input";
-import GPAsticLogo from "@/public/GPAstic.ico";
+import GPAsticLogo from "@/public/GPAstic.png";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
