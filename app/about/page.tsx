@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import GPAsticLogo from "@/public/GPAstic.ico";
+import GPAsticLogo from "@/public/GPAstic.png";
 
 export default function AboutPage() {
   return (
