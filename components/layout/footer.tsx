@@ -15,8 +15,6 @@ export function Footer() {
               alt="GPAstic Logo"
               width={120} // can be 100, 150, etc. just keep ratio
               height={100} // 190 / 1.896 ≈ 100
-              className=""
-              priority
             />
           </div>
 
