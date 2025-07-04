@@ -8,6 +8,8 @@ A modern, user-friendly web application for calculating SGPA (Semester Grade Poi
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
 
+![all](/public/screenshot/ALL.png)
+
 ## ✨ Features
 
 - **📊 SGPA & CGPA Calculation:** Accurate calculations following official academic standards
