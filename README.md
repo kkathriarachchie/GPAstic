@@ -1,112 +1,146 @@
-# GPAstic
+# 🎓 GPA Calculator
 
-A comprehensive Grade Point Average (GPA) calculator designed to simplify academic progress tracking with precision and ease.
+A modern, user-friendly web application for calculating SGPA (Semester Grade Point Average) and CGPA (Cumulative Grade Point Average) with comprehensive data management features.
 
-![GPAstic Logo](public/GPAstic.png)
+![GPA Calculator](https://img.shields.io/badge/GPA-Calculator-blue)
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
 
-## Table of Contents
+## ✨ Features
 
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Demo](#demo)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Data Import & Export](#data-import--export)
-- [Grading System](#grading-system)
-- [Technologies Used](#technologies-used)
-- [Developer](#developer)
-- [License](#license)
+- **📊 SGPA & CGPA Calculation:** Accurate calculations following official academic standards
+- **🎨 User-Friendly Interface:** Intuitive design for easy data entry and clear results
+- **💾 Data Management:** Import/export your data as CSV for backup or transfer
+- **📈 Progress Tracking:** Visualize your academic progress across all semesters
+- **🔒 Privacy First:** All data is stored locally in your browser - no external servers
+- **📱 Responsive Design:** Works seamlessly on desktop and mobile devices
 
----
+## 🚀 Demo
 
-## Features
+[Live Demo](https://your-demo-link.com) <!-- Replace with your actual demo link -->
 
-- SGPA & CGPA calculation
-- User-friendly interface
-- Data import/export (CSV)
-- Progress tracking
-- Privacy-first (local storage)
-- Responsive design
+## 📋 Prerequisites
 
-## Screenshots
+Before you begin, ensure you have the following installed:
 
-| Home Page                     | Add Semester/Modules                          | GPA Calculation                                     |
-| ----------------------------- | --------------------------------------------- | --------------------------------------------------- |
-| ![Home](screenshots/home.png) | ![Add Semester](screenshots/add_semester.png) | ![GPA Calculation](screenshots/gpa_calculation.png) |
+- [Node.js](https://nodejs.org/) (v20+ recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-> _Add more screenshots as needed. Place your images in the `screenshots` folder._
+## 🛠️ Installation
 
-## Demo
+1. **Clone the repository:**
 
-Try GPAstic online: [https://your-demo-link.com](https://your-demo-link.com)
+   ```bash
+   git clone https://github.com/kkathriarachchie/gpa_cal.git
+   cd gpa_cal
+   ```
 
-## Getting Started
+2. **Install dependencies:**
 
-### Prerequisites
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-- Node.js (v20+ recommended)
-- npm or yarn
+3. **Run the development server:**
 
-### Installation
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-```bash
-git clone https://github.com/kkathriarachchie/gpa_cal.git
-cd gpa_cal
-npm install
-npm run dev
+4. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📖 Usage
+
+### Getting Started
+
+1. **Enter Module Details:** Add your modules, codes, and credit hours for each semester
+2. **Select Grades:** Choose grades for each module; GPA is calculated automatically
+3. **Track Progress:** View SGPA for each semester and overall CGPA
+4. **Export/Import Data:** Backup your data or transfer between devices using CSV
+
+### Data Import & Export
+
+- **Export:** Click the "Export" button in the header to download your data as a CSV file
+- **Import:** Click the "Import" button and select a previously exported CSV file to restore your data
+
+> **Note:** All data is stored locally in your browser. No information is sent to external servers, ensuring complete privacy.
+
+## 🏗️ Project Structure
+
+```
+gpa_cal/
+├── components/          # Reusable React components
+├── pages/              # Next.js pages
+├── styles/             # CSS and styling files
+├── utils/              # Utility functions
+├── types/              # TypeScript type definitions
+├── public/             # Static assets
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+## 🛠️ Technologies Used
 
-## Usage
+- **[Next.js](https://nextjs.org/)** - React framework for production
+- **[React](https://react.dev/)** - JavaScript library for building user interfaces
+- **[TypeScript](https://www.typescriptlang.org/)** - Typed superset of JavaScript
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Radix UI](https://www.radix-ui.com/)** - Low-level UI primitives
+- **[Lucide Icons](https://lucide.dev/)** - Beautiful & consistent icon toolkit
 
-1. Enter module details for each semester.
-2. Select grades; GPA is calculated automatically.
-3. Track SGPA and CGPA.
-4. Export/import data as CSV.
+## 📱 Screenshots
 
-## Data Import & Export
+<!-- Add screenshots of your application here -->
 
-- **Export:** Download your data as a CSV file.
-- **Import:** Restore your data from a CSV file.
+| Desktop View                       | Mobile View                      |
+| ---------------------------------- | -------------------------------- |
+| ![Desktop](screenshot-desktop.png) | ![Mobile](screenshot-mobile.png) |
 
-_All data is stored locally in your browser._
+## 🤝 Contributing
 
-## Grading System
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-| Grade | Points |
-| ----- | ------ |
-| A+    | 4.0    |
-| A     | 4.0    |
-| A-    | 3.7    |
-| B+    | 3.3    |
-| B     | 3.0    |
-| B-    | 2.7    |
-| C+    | 2.3    |
-| C     | 2.0    |
-| C-    | 1.7    |
-| D+    | 1.3    |
-| D     | 1.0    |
-| E-    | 0.0    |
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Technologies Used
+## 📝 License
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Radix UI
-- Lucide Icons
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Developer
+## 👨‍💻 Developer
 
 **Kavishka Kathriarachchie**  
-[GitHub](https://github.com/kkathriarachchie) | [LinkedIn](https://linkedin.com/in/kavishka-kathriarachchi) | [Email](mailto:kkathriarachchie@gmail.com)
+_Full Stack Developer_
 
-## License
+- 📧 [Email](mailto:kkathriarachchie@gmail.com)
+- 🐙 [GitHub](https://github.com/kkathriarachchie)
+- 💼 [LinkedIn](https://linkedin.com/in/kavishka-kathriarachchi)
 
-MIT License
+_Available for freelance projects and collaborations._
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped shape this project
+- Inspired by the need for a simple, privacy-focused GPA calculator
+- Built with modern web technologies for optimal performance
+
+## 📞 Support
+
+If you encounter any issues or have questions, please:
+
+1. Check the [Issues](https://github.com/kkathriarachchie/gpa_cal/issues) page
+2. Create a new issue if your problem isn't already reported
+3. Contact the developer directly via email
 
 ---
 
-© 2025 GPAstic. All Rights Reserved.
+⭐ **Star this repository if you find it helpful!**
