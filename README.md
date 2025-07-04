@@ -1,4 +1,4 @@
-# 🎓 GPA Calculator
+# 🎓 GPAstic
 
 A modern, user-friendly web application for calculating SGPA (Semester Grade Point Average) and CGPA (Cumulative Grade Point Average) with comprehensive data management features.
 
@@ -19,7 +19,7 @@ A modern, user-friendly web application for calculating SGPA (Semester Grade Poi
 
 ## 🚀 Demo
 
-[Live Demo](https://your-demo-link.com) <!-- Replace with your actual demo link -->
+[Live Demo](https://kkathriarachchie.github.io/GPAstic/) <!-- Replace with your actual demo link -->
 
 ## 📋 Prerequisites
 
@@ -33,7 +33,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/kkathriarachchie/gpa_cal.git
+   git clone https://github.com/kkathriarachchie/GPAstic.git
    cd gpa_cal
    ```
 
@@ -96,11 +96,7 @@ gpa_cal/
 
 ## 📱 Screenshots
 
-<!-- Add screenshots of your application here -->
-
-| Desktop View                       | Mobile View                      |
-| ---------------------------------- | -------------------------------- |
-| ![Desktop](screenshot-desktop.png) | ![Mobile](screenshot-mobile.png) |
+![Loding](/public/screenshot/Loding.png)
 
 ## 🤝 Contributing
 
@@ -111,10 +107,6 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Developer
 
@@ -127,17 +119,11 @@ _Full Stack Developer_
 
 _Available for freelance projects and collaborations._
 
-## 🙏 Acknowledgments
-
-- Thanks to all contributors who have helped shape this project
-- Inspired by the need for a simple, privacy-focused GPA calculator
-- Built with modern web technologies for optimal performance
-
 ## 📞 Support
 
 If you encounter any issues or have questions, please:
 
-1. Check the [Issues](https://github.com/kkathriarachchie/gpa_cal/issues) page
+1. Check the [Issues](https://github.com/kkathriarachchie/GPAstic/issues) page
 2. Create a new issue if your problem isn't already reported
 3. Contact the developer directly via email
 
