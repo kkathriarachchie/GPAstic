@@ -97,6 +97,11 @@ gpa_cal/
 ## 📱 Screenshots
 
 ![Loding](/public/screenshot/Loding.png)
+![1](/public/screenshot/1.png)
+![2](/public/screenshot/2.png)
+![3](/public/screenshot/3.png)
+![4](/public/screenshot/4.png)
+![Guid&About](/public/screenshot/Guid&About.png)
 
 ## 🤝 Contributing
 
