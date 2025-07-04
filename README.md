@@ -34,7 +34,7 @@ Before you begin, ensure you have the following installed:
 
    ```bash
    git clone https://github.com/kkathriarachchie/GPAstic.git
-   cd gpa_cal
+   cd GPAstic
    ```
 
 2. **Install dependencies:**
