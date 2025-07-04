@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GPAstic
+
+A comprehensive Grade Point Average (GPA) calculator designed to simplify academic progress tracking with precision and ease.
+
+![GPAstic Logo](public/GPAstic.png)
+
+## Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Demo](#demo)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Data Import & Export](#data-import--export)
+- [Grading System](#grading-system)
+- [Technologies Used](#technologies-used)
+- [Developer](#developer)
+- [License](#license)
+
+---
+
+## Features
+
+- SGPA & CGPA calculation
+- User-friendly interface
+- Data import/export (CSV)
+- Progress tracking
+- Privacy-first (local storage)
+- Responsive design
+
+## Screenshots
+
+| Home Page                     | Add Semester/Modules                          | GPA Calculation                                     |
+| ----------------------------- | --------------------------------------------- | --------------------------------------------------- |
+| ![Home](screenshots/home.png) | ![Add Semester](screenshots/add_semester.png) | ![GPA Calculation](screenshots/gpa_calculation.png) |
+
+> _Add more screenshots as needed. Place your images in the `screenshots` folder._
+
+## Demo
+
+Try GPAstic online: [https://your-demo-link.com](https://your-demo-link.com)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v20+ recommended)
+- npm or yarn
+
+### Installation
 
 ```bash
+git clone https://github.com/kkathriarachchie/gpa_cal.git
+cd gpa_cal
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Enter module details for each semester.
+2. Select grades; GPA is calculated automatically.
+3. Track SGPA and CGPA.
+4. Export/import data as CSV.
 
-## Learn More
+## Data Import & Export
 
-To learn more about Next.js, take a look at the following resources:
+- **Export:** Download your data as a CSV file.
+- **Import:** Restore your data from a CSV file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+_All data is stored locally in your browser._
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Grading System
 
-## Deploy on Vercel
+| Grade | Points |
+| ----- | ------ |
+| A+    | 4.0    |
+| A     | 4.0    |
+| A-    | 3.7    |
+| B+    | 3.3    |
+| B     | 3.0    |
+| B-    | 2.7    |
+| C+    | 2.3    |
+| C     | 2.0    |
+| C-    | 1.7    |
+| D+    | 1.3    |
+| D     | 1.0    |
+| E-    | 0.0    |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Radix UI
+- Lucide Icons
+
+## Developer
+
+**Kavishka Kathriarachchie**  
+[GitHub](https://github.com/kkathriarachchie) | [LinkedIn](https://linkedin.com/in/kavishka-kathriarachchi) | [Email](mailto:kkathriarachchie@gmail.com)
+
+## License
+
+MIT License
+
+---
+
+© 2025 GPAstic. All Rights Reserved.
